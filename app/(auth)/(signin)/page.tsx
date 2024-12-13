@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import SignInViewPage from '../_components/sigin-view';
+import SignInViewPage from '../_components/signin-view';
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default async function Page() {
   const session = await auth();
 
-  console.log('___session', session?.user);
+  // console.log('___session', session?.user);
 
   if (!session?.user) {
     // Nếu không có session, hiển thị trang đăng nhập

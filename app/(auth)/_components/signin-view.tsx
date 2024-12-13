@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import UserAuthForm from './user-auth-form';
+import UserAuth from './user-auth';
 import Image from 'next/image';
 import bg from '@/public/auth-pic.jpg';
 
@@ -22,16 +22,7 @@ export default function SignInViewPage() {
       </div>
       <div className="flex flex-col justify-center bg-background lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[400px]">
-          <div className="flex flex-col space-y-2 text-center font-bold">
-            <h1 className="text-3xl font-semibold tracking-tight">
-              Welcome to VOU Marketing
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              <span>Don&apos;t have an account?</span>
-              <button className="ml-2 text-blue-500">Sign up for free</button>
-            </p>
-          </div>
-          <UserAuthForm />
+          <UserAuth />
         </div>
       </div>
     </div>
