@@ -5,13 +5,13 @@ import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Authentication | Sign In',
-  description: 'Sign In page for authentication.',
+  description: 'Sign In page for authentication.'
 };
 
 export default async function Page() {
   const session = await auth();
 
-  console.log("___session", session?.user);
+  console.log('___session', session?.user);
 
   if (!session?.user) {
     // Nếu không có session, hiển thị trang đăng nhập

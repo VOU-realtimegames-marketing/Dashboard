@@ -99,10 +99,12 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => {
-              console.log("___signOut__2");
-              signOut()
-            }}>
+            <DropdownMenuItem
+              onClick={() => {
+                console.log('___signOut__2');
+                signOut();
+              }}
+            >
               {/* <LogOut /> */}
               Log out
             </DropdownMenuItem>

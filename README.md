@@ -32,3 +32,4 @@ Follow these steps to clone the repository and start the development server:
 - Add the required environment variables to the `.env.local` file.
 - `npm run dev`
 
+- Youtube start: https://youtu.be/AH6slYVf18k

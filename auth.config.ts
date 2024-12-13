@@ -14,14 +14,14 @@ const authConfig = {
         password: { type: 'password' }
       },
       async authorize(credentials, req) {
-        console.log("___credentials", credentials);
+        console.log('___credentials', credentials);
 
         // Fake user for testing purposes
         const user = {
           id: '1',
           name: 'Name',
           role: 'admin', // Hard-coded role "admin" || "partner"
-          email: credentials?.email as string || 'admin@vou.vn',
+          email: (credentials?.email as string) || 'admin@vou.vn'
         };
 
         if (user) {
@@ -44,7 +44,7 @@ const authConfig = {
       return token;
     },
     async session({ session, token }) {
-      console.log("___token", token); // Log để kiểm tra token
+      console.log('___token', token); // Log để kiểm tra token
 
       if (token) {
         session.user = {
@@ -53,7 +53,7 @@ const authConfig = {
           role: token.role as string // Cast về string
         };
       }
-      console.log("___session", session); // Log để kiểm tra session
+      console.log('___session', session); // Log để kiểm tra session
       return session;
     }
   },

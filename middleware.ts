@@ -7,7 +7,7 @@ import authConfig from './auth.config';
 const { auth } = NextAuth(authConfig);
 
 export default auth((req) => {
-  console.log("___req.auth:", req.auth);
+  console.log('___req.auth:', req.auth);
 
   if (!req.auth) {
     const url = req.url.replace(req.nextUrl.pathname, '/');
@@ -21,7 +21,10 @@ export default auth((req) => {
   if (userRole === 'admin' && !url.pathname.startsWith('/dashboard/admin')) {
     url.pathname = '/dashboard/admin';
     return Response.redirect(url);
-  } else if (userRole === 'partner' && !url.pathname.startsWith('/dashboard/partner')) {
+  } else if (
+    userRole === 'partner' &&
+    !url.pathname.startsWith('/dashboard/partner')
+  ) {
     url.pathname = '/dashboard/partner';
     return Response.redirect(url);
   }

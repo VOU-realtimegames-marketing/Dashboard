@@ -206,10 +206,12 @@ export default function AppSidebar({ role }: { role: string }) {
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => {
-                  console.log("___signOut__3");
-                  signOut()
-                }}>
+                <DropdownMenuItem
+                  onClick={() => {
+                    console.log('___signOut__3');
+                    signOut();
+                  }}
+                >
                   <LogOut />
                   &nbsp; Log out
                 </DropdownMenuItem>

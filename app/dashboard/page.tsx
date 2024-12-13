@@ -19,12 +19,10 @@ export default async function Dashboard() {
     redirect('/'); // Fallback redirect for unexpected roles
   }
 
-
   // if (!session?.user) return;
 
   // const user: User = session.user;
   // console.log("___user:", user);
-
 
   // if (!user) {
   //   return redirect('/');

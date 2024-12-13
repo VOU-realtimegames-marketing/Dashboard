@@ -166,9 +166,8 @@ export const navItems: NavItem[] = [
         icon: 'login'
       }
     ]
-  },
+  }
 ];
-
 
 export const adminNavItems: NavItem[] = [
   {
@@ -223,9 +222,8 @@ export const adminNavItems: NavItem[] = [
         icon: 'login'
       }
     ]
-  },
+  }
 ];
-
 
 export const partnerNavItems: NavItem[] = [
   {
@@ -272,7 +270,7 @@ export const partnerNavItems: NavItem[] = [
         icon: 'login'
       }
     ]
-  },
+  }
 ];
 
 // Function để chọn menu dựa trên role

@@ -56,10 +56,12 @@ export function UserNav() {
             <DropdownMenuItem>New Team</DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => {
-            console.log("___signOut__1");
-            signOut()
-          }}>
+          <DropdownMenuItem
+            onClick={() => {
+              console.log('___signOut__1');
+              signOut();
+            }}
+          >
             Log out
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>
