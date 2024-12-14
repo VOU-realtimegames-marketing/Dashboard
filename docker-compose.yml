@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  nextjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nextjs-app
+    ports:
+      - '3000:3000' # Map cổng local 3000 với cổng container 3000
+    volumes:
+      - .:/app # Gắn mount thư mục local vào container
+      - /app/node_modules # Ignore node_modules trong container
+    environment:
+      NODE_ENV: development
+      NEXTAUTH_URL: http://localhost:3000
