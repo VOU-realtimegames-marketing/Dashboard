@@ -23,6 +23,8 @@ Stacks:
 
 ## Getting Started
 
+### Manual
+
 Follow these steps to clone the repository and start the development server:
 
 - `npm install`
@@ -33,3 +35,17 @@ Follow these steps to clone the repository and start the development server:
 - `npm run dev`
 
 - Youtube start: https://youtu.be/AH6slYVf18k
+
+### Using docker
+
+- clone project
+- open terminal (ctrl + `)
+- run "docker-compose up -d --build"
+- After edit file, then saved, docker will auto rebuild by hot-reload
+
+### Docker check:
+
+- Cd to container: "docker exec -it nextjs-app sh"
+- Check logs: "docker-compose logs -f"
+- Stop container: "docker-compose stop"
+- Start again (not build again): "docker-compose start"

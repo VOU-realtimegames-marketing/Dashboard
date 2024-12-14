@@ -14,7 +14,15 @@ const nextConfig = {
       }
     ]
   },
-  transpilePackages: ['geist']
+  transpilePackages: ['geist'],
+  reactStrictMode: true,
+  devIndicators: {
+    autoPrerender: false
+  },
+  serverRuntimeConfig: {
+    host: '0.0.0.0',
+    port: 3000
+  }
 };
 
 module.exports = nextConfig;
