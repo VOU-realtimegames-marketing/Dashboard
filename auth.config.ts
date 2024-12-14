@@ -10,12 +10,14 @@ const authConfig = {
     }),
     CredentialProvider({
       credentials: {
+        fullName: { type: 'text' },
         email: { type: 'email' },
         password: { type: 'password' }
       },
       async authorize(credentials, req) {
-        console.log('request 💥', req);
-        // console.log('___credentials', credentials);
+        console.log('___credentials 💥', credentials);
+
+        console.log('__req 💥', req);
 
         // Fake user for testing purposes
         const user = {
