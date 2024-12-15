@@ -23,9 +23,17 @@ export default function LoginForm() {
   });
 
   const onSubmit = async (data: UserLoginFormValue) => {
-    startTransition(() => {
-      signInAction(data);
-      toast.success('Signed In Successfully!');
+    startTransition(async () => {
+      try {
+        await signInAction(data);
+        toast.success('Signed In Successfully!');
+      } catch (err) {
+        if (err instanceof Error) {
+          toast.error(err.message);
+        } else {
+          toast.error('An unexpected error occurred');
+        }
+      }
     });
   };
 

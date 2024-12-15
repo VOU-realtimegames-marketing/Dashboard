@@ -54,7 +54,7 @@ export default function AppSidebar({ role }: { role: string }) {
   // const { data: session } = useSession();
   const session = {
     user: {
-      role: 'nothing',
+      role: 'admin',
       id: '1',
       name: 'Name',
       email: 'demo@example.com',
@@ -65,7 +65,8 @@ export default function AppSidebar({ role }: { role: string }) {
   const pathname = usePathname();
 
   // Lấy role từ session và chọn đúng bộ navItems
-  const navItems = getNavItems(role);
+  // const navItems = getNavItems(role);
+  const navItems = getNavItems('admin');
 
   return (
     <Sidebar collapsible="icon">

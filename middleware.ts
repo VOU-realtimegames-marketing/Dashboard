@@ -9,15 +9,12 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
-  const response = await fetch(
-    `${process.env.API_GATEWAY_URL}/api/v1/authorize`,
-    {
-      method: 'GET',
-      headers: {
-        cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`
-      }
+  const response = await fetch(`${process.env.WEB_CLIENT_URL}/api/auth/user`, {
+    method: 'GET',
+    headers: {
+      cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`
     }
-  );
+  });
 
   if (!response.ok) {
     return NextResponse.redirect(new URL('/login', request.url));
