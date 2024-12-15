@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Icons } from '@/components/icons';
 
 export default function GoogleSignInButton() {
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl');
+  // const searchParams = useSearchParams();
+  // const callbackUrl = searchParams.get('callbackUrl');
 
   return (
     <Button

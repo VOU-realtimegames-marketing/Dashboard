@@ -41,9 +41,9 @@ const signupFormSchema = z
 
 type UserSignupFormValue = z.infer<typeof signupFormSchema>;
 
-export default function SignupForm() {
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl');
+export default function SignUpForm() {
+  // const searchParams = useSearchParams();
+  // const callbackUrl = searchParams.get('callbackUrl');
   const [loading, startTransition] = useTransition();
   const form = useForm<UserSignupFormValue>({
     resolver: zodResolver(signupFormSchema)

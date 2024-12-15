@@ -26,16 +26,11 @@ const loginFormSchema = z.object({
 type UserLoginFormValue = z.infer<typeof loginFormSchema>;
 
 export default function LoginForm() {
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl');
+  // const searchParams = useSearchParams();
+  // const callbackUrl = searchParams.get('callbackUrl');
   const [loading, startTransition] = useTransition();
-  const defaultValues = {
-    email: 'demo@example.com',
-    password: '12345678'
-  };
   const form = useForm<UserLoginFormValue>({
-    resolver: zodResolver(loginFormSchema),
-    defaultValues
+    resolver: zodResolver(loginFormSchema)
   });
 
   const onSubmit = async (data: UserLoginFormValue) => {

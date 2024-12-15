@@ -1,32 +1,34 @@
 'use client';
 
 import { useState } from 'react';
-import GoogleSignInButton from './google-auth-button';
-import LoginForm from './login-form';
-import SignupForm from './signup-form';
+import { useRouter } from 'next/navigation';
+import GoogleSignInButton from '../_components/google-auth-button';
+import Link from 'next/link';
+import SignUpForm from '../_components/signup-form';
 
-export default function UserAuth() {
+export default function UserAuth({
+  children
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   const [showLogin, setShowLogin] = useState(true);
+  const router = useRouter();
 
   return (
     <>
       <div className="flex flex-col space-y-2 text-center font-bold">
         <h1 className="text-3xl font-semibold tracking-tight">
-          {showLogin ? 'Welcome to VOU Marketing' : 'Create an account'}
+          Create an account
         </h1>
         <p className="text-sm text-muted-foreground">
-          <span>
-            {showLogin ? "Don't have an account?" : 'Already have an account?'}
-          </span>
-          <button
-            className="ml-2 text-blue-500"
-            onClick={() => setShowLogin((show) => !show)}
-          >
-            {showLogin ? 'Sign up for free' : 'Login'}
-          </button>
+          <span>Already have an account?</span>
+          <Link href="/login" className="ml-2 text-blue-500">
+            Login
+          </Link>
         </p>
       </div>
-      {showLogin ? <LoginForm /> : <SignupForm />}
+
+      <SignUpForm />
 
       <div className="relative">
         <div className="absolute inset-0 flex items-center">

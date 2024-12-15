@@ -5,9 +5,9 @@ export async function middleware(request: NextRequest) {
   const accessToken = request.cookies.get('accessToken')?.value;
   const refreshToken = request.cookies.get('refreshToken')?.value;
 
-  // if (!accessToken || !refreshToken) {
-  //   return NextResponse.redirect(new URL('/login', request.url));
-  // }
+  if (!accessToken || !refreshToken) {
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
 
   const response = await fetch(
     `${process.env.API_GATEWAY_URL}/api/v1/authorize`,
@@ -23,33 +23,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
-  const setCookieHeader = response.headers.get('set-cookie');
-
-  const accessTokenMatch = setCookieHeader?.match(/accessToken=([^;]*)/);
-  if (!accessTokenMatch) return;
-
-  const refreshTokenMatch = setCookieHeader?.match(/refreshToken=([^;]*)/);
-
-  const newAccessToken = accessTokenMatch[1];
-  const newRefreshToken = refreshTokenMatch ? refreshTokenMatch[1] : null;
-
-  console.log({ newAccessToken: newAccessToken, newRefreshToken });
-
-  const nextResponse = NextResponse.next();
-  if (newAccessToken) {
-    nextResponse.cookies.set('accessToken', String(newAccessToken), {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production'
-    });
-  }
-  if (newRefreshToken) {
-    nextResponse.cookies.set('refreshToken', String(newRefreshToken), {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production'
-    });
-  }
-
-  return nextResponse;
+  return;
 }
 export const config = {
   matcher: [
