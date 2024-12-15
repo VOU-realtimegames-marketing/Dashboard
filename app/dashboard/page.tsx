@@ -1,10 +1,21 @@
+import { auth } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 
+// {
+//   user: {
+//     username: 'demo',
+//     full_name: 'Haha Cuong',
+//     email: 'demo@example.com',
+//     role: 'user',
+//     password_changed_at: '0001-01-01T00:00:00Z',
+//     created_at: '2024-12-15T07:03:26.086298Z'
+//   }
+// }
 export default async function Dashboard() {
-  const session = { user: { role: 'nothing' } };
+  const session = await auth();
 
   if (!session?.user) {
-    redirect('/'); // Redirect to home if user is not authenticated
+    redirect('/login'); // Redirect to home if user is not authenticated
   }
 
   const { role } = session.user;
@@ -14,6 +25,6 @@ export default async function Dashboard() {
   } else if (role === 'partner') {
     redirect('/dashboard/partner/overview');
   } else {
-    redirect('/'); // Fallback redirect for unexpected roles
+    redirect('/login'); // Fallback redirect for unexpected roles
   }
 }

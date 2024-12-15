@@ -25,5 +25,5 @@ export async function signInAction(data: UserLoginFormValue) {
   cookieStore.set('accessToken', user.access_token);
   cookieStore.set('refreshToken', user.refresh_token);
 
-  redirect('/dashboard/admin/overview');
+  redirect('/dashboard');
 }
