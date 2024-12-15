@@ -1,19 +1,8 @@
-'use client';
-
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import GoogleSignInButton from '../_components/google-auth-button';
 import Link from 'next/link';
 import SignUpForm from '../_components/signup-form';
 
-export default function UserAuth({
-  children
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  const [showLogin, setShowLogin] = useState(true);
-  const router = useRouter();
-
+export default function Page() {
   return (
     <>
       <div className="flex flex-col space-y-2 text-center font-bold">

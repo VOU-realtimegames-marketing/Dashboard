@@ -9,25 +9,14 @@ import {
   FormMessage
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { loginFormSchema, UserLoginFormValue } from '@/lib/form-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useSearchParams } from 'next/navigation';
 import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import * as z from 'zod';
-
-const loginFormSchema = z.object({
-  email: z.string().email({ message: 'Enter a valid email address' }),
-  password: z
-    .string()
-    .min(8, { message: 'Password must be at least 8 characters' })
-});
-
-type UserLoginFormValue = z.infer<typeof loginFormSchema>;
+import { signInAction } from '@/lib/action';
 
 export default function LoginForm() {
-  // const searchParams = useSearchParams();
-  // const callbackUrl = searchParams.get('callbackUrl');
   const [loading, startTransition] = useTransition();
   const form = useForm<UserLoginFormValue>({
     resolver: zodResolver(loginFormSchema)
@@ -35,11 +24,7 @@ export default function LoginForm() {
 
   const onSubmit = async (data: UserLoginFormValue) => {
     startTransition(() => {
-      // signIn('credentials', {
-      //   email: data.email,
-      //   password: data.password,
-      //   callbackUrl: callbackUrl ?? '/dashboard'
-      // });
+      signInAction(data);
       toast.success('Signed In Successfully!');
     });
   };

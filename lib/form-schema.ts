@@ -37,3 +37,37 @@ export const profileSchema = z.object({
 });
 
 export type ProfileFormValues = z.infer<typeof profileSchema>;
+
+export const signupFormSchema = z
+  .object({
+    fullName: z.string().min(2, {
+      message: 'Name must be at least 2 characters.'
+    }),
+    email: z.string().email({ message: 'Enter a valid email address' }),
+    username: z
+      .string()
+      .min(2, { message: 'Username must be at least 2 characters.' })
+      .regex(/^[a-z0-9_]+$/, {
+        message:
+          'Username must contain only lowercase letters, digits, or underscore'
+      }),
+    password: z
+      .string()
+      .min(8, { message: 'Password must be at least 8 characters' }),
+    confirmPassword: z.string()
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: 'Password must match',
+    path: ['confirmPassword']
+  });
+
+export type UserSignupFormValue = z.infer<typeof signupFormSchema>;
+
+export const loginFormSchema = z.object({
+  email: z.string().email({ message: 'Enter a valid email address' }),
+  password: z
+    .string()
+    .min(8, { message: 'Password must be at least 8 characters' })
+});
+
+export type UserLoginFormValue = z.infer<typeof loginFormSchema>;

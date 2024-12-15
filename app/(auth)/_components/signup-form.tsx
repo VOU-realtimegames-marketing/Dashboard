@@ -9,41 +9,13 @@ import {
   FormMessage
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { signupFormSchema, UserSignupFormValue } from '@/lib/form-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useSearchParams } from 'next/navigation';
 import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import * as z from 'zod';
-
-const signupFormSchema = z
-  .object({
-    fullName: z.string().min(2, {
-      message: 'Name must be at least 2 characters.'
-    }),
-    email: z.string().email({ message: 'Enter a valid email address' }),
-    username: z
-      .string()
-      .min(2, { message: 'Username must be at least 2 characters.' })
-      .regex(/^[a-z0-9_]+$/, {
-        message:
-          'Username must contain only lowercase letters, digits, or underscore'
-      }),
-    password: z
-      .string()
-      .min(8, { message: 'Password must be at least 8 characters' }),
-    confirmPassword: z.string()
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: 'Password must match',
-    path: ['confirmPassword']
-  });
-
-type UserSignupFormValue = z.infer<typeof signupFormSchema>;
 
 export default function SignUpForm() {
-  // const searchParams = useSearchParams();
-  // const callbackUrl = searchParams.get('callbackUrl');
   const [loading, startTransition] = useTransition();
   const form = useForm<UserSignupFormValue>({
     resolver: zodResolver(signupFormSchema)
