@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import SignInViewPage from '../_components/signin-view';
-import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
@@ -9,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const session = await auth();
+  const session = { user: { role: 'nothing' } };
 
   // console.log('___session', session?.user);
 

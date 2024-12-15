@@ -11,9 +11,18 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { signOut, useSession } from 'next-auth/react';
 export function UserNav() {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
+  const session = {
+    user: {
+      role: 'nothing',
+      id: '1',
+      name: 'Name',
+      email: 'demo@example.com',
+      image:
+        'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
+    }
+  };
   if (session) {
     return (
       <DropdownMenu>
@@ -59,7 +68,7 @@ export function UserNav() {
           <DropdownMenuItem
             onClick={() => {
               console.log('___signOut__1');
-              signOut();
+              // signOut();
             }}
           >
             Log out

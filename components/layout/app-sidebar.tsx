@@ -39,7 +39,6 @@ import {
   GalleryVerticalEnd,
   LogOut
 } from 'lucide-react';
-import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import * as React from 'react';
@@ -52,7 +51,17 @@ export const company = {
 };
 
 export default function AppSidebar({ role }: { role: string }) {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
+  const session = {
+    user: {
+      role: 'nothing',
+      id: '1',
+      name: 'Name',
+      email: 'demo@example.com',
+      image:
+        'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
+    }
+  };
   const pathname = usePathname();
 
   // Lấy role từ session và chọn đúng bộ navItems
@@ -209,7 +218,7 @@ export default function AppSidebar({ role }: { role: string }) {
                 <DropdownMenuItem
                   onClick={() => {
                     console.log('___signOut__3');
-                    signOut();
+                    // signOut();
                   }}
                 >
                   <LogOut />

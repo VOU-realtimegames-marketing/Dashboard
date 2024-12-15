@@ -1,9 +1,7 @@
-import { auth } from '@/auth';
-import { User } from 'next-auth';
 import { redirect } from 'next/navigation';
 
 export default async function Dashboard() {
-  const session = await auth();
+  const session = { user: { role: 'nothing' } };
 
   if (!session?.user) {
     redirect('/'); // Redirect to home if user is not authenticated
@@ -18,19 +16,4 @@ export default async function Dashboard() {
   } else {
     redirect('/'); // Fallback redirect for unexpected roles
   }
-
-  // if (!session?.user) return;
-
-  // const user: User = session.user;
-  // console.log("___user:", user);
-
-  // if (!user) {
-  //   return redirect('/');
-  // }
-
-  // if (user.name === 'partner') {
-  //   redirect('/dashboard/partner');
-  // } else {
-  //   redirect('/dashboard/overview');
-  // }
 }

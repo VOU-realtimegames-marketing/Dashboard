@@ -1,33 +1,63 @@
-// Protecting routes with next-auth
-// https://next-auth.js.org/configuration/nextjs#middleware
-// https://nextjs.org/docs/app/building-your-application/routing/middleware
-import NextAuth from 'next-auth';
-import authConfig from './auth.config';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-const { auth } = NextAuth(authConfig);
+export async function middleware(request: NextRequest) {
+  const accessToken = request.cookies.get('accessToken')?.value;
+  const refreshToken = request.cookies.get('refreshToken')?.value;
 
-export default auth((req) => {
-  console.log('___req.auth:', req.auth);
+  // if (!accessToken || !refreshToken) {
+  //   return NextResponse.redirect(new URL('/login', request.url));
+  // }
 
-  if (!req.auth) {
-    const url = req.url.replace(req.nextUrl.pathname, '/');
-    return Response.redirect(url);
+  const response = await fetch(
+    `${process.env.API_GATEWAY_URL}/api/v1/authorize`,
+    {
+      method: 'GET',
+      headers: {
+        cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`
+      }
+    }
+  );
+
+  if (!response.ok) {
+    return NextResponse.redirect(new URL('/login', request.url));
   }
 
-  const userRole = req?.auth?.user?.role;
-  const url = new URL(req.url);
+  const setCookieHeader = response.headers.get('set-cookie');
 
-  // Redirect based on user role
-  if (userRole === 'admin' && !url.pathname.startsWith('/dashboard/admin')) {
-    url.pathname = '/dashboard/admin';
-    return Response.redirect(url);
-  } else if (
-    userRole === 'partner' &&
-    !url.pathname.startsWith('/dashboard/partner')
-  ) {
-    url.pathname = '/dashboard/partner';
-    return Response.redirect(url);
+  const accessTokenMatch = setCookieHeader?.match(/accessToken=([^;]*)/);
+  if (!accessTokenMatch) return;
+
+  const refreshTokenMatch = setCookieHeader?.match(/refreshToken=([^;]*)/);
+
+  const newAccessToken = accessTokenMatch[1];
+  const newRefreshToken = refreshTokenMatch ? refreshTokenMatch[1] : null;
+
+  console.log({ newAccessToken: newAccessToken, newRefreshToken });
+
+  const nextResponse = NextResponse.next();
+  if (newAccessToken) {
+    nextResponse.cookies.set('accessToken', String(newAccessToken), {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production'
+    });
   }
-});
+  if (newRefreshToken) {
+    nextResponse.cookies.set('refreshToken', String(newRefreshToken), {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production'
+    });
+  }
 
-export const config = { matcher: ['/dashboard/:path*'] };
+  return nextResponse;
+}
+export const config = {
+  matcher: [
+    {
+      source:
+        '/((?!signup|verify|login|assets|api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)'
+    }
+  ]
+};
+
+// '/((?!signup|verify|login|assets|api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)'
