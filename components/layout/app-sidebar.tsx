@@ -36,7 +36,7 @@ import {
   ChevronRight,
   ChevronsUpDown,
   CreditCard,
-  GalleryVerticalEnd,
+  Gamepad2,
   LogOut
 } from 'lucide-react';
 import Link from 'next/link';
@@ -46,9 +46,9 @@ import { Icons } from '../icons';
 import { signOutAction } from '@/lib/action';
 
 export const company = {
-  name: 'Acme Inc',
-  logo: GalleryVerticalEnd,
-  plan: 'Enterprise'
+  name: 'VOU Realtime Game',
+  logo: Gamepad2,
+  plan: 'Marketing'
 };
 
 export default function AppSidebar({ session }: { session: Session }) {
