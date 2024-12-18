@@ -11,6 +11,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import { signOutAction } from '@/lib/action';
 export function UserNav() {
   // const { data: session } = useSession();
   const session = {
@@ -65,12 +66,7 @@ export function UserNav() {
             <DropdownMenuItem>New Team</DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onClick={() => {
-              console.log('___signOut__1');
-              // signOut();
-            }}
-          >
+          <DropdownMenuItem onClick={() => signOutAction()}>
             Log out
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>

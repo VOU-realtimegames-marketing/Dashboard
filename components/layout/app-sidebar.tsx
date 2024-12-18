@@ -29,7 +29,7 @@ import {
   SidebarMenuSubItem,
   SidebarRail
 } from '@/components/ui/sidebar';
-import { getNavItems } from '@/constants/data';
+import { getNavItems, Session } from '@/constants/data';
 import {
   BadgeCheck,
   Bell,
@@ -43,6 +43,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import * as React from 'react';
 import { Icons } from '../icons';
+import { signOutAction } from '@/lib/action';
 
 export const company = {
   name: 'Acme Inc',
@@ -50,23 +51,12 @@ export const company = {
   plan: 'Enterprise'
 };
 
-export default function AppSidebar({ role }: { role: string }) {
-  // const { data: session } = useSession();
-  const session = {
-    user: {
-      role: 'admin',
-      id: '1',
-      name: 'Name',
-      email: 'demo@example.com',
-      image:
-        'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
-    }
-  };
+export default function AppSidebar({ session }: { session: Session }) {
   const pathname = usePathname();
 
-  // Lấy role từ session và chọn đúng bộ navItems
-  // const navItems = getNavItems(role);
-  const navItems = getNavItems('admin');
+  const { full_name, email, role } = session.user;
+
+  const navItems = getNavItems(role);
 
   return (
     <Sidebar collapsible="icon">
@@ -152,20 +142,19 @@ export default function AppSidebar({ role }: { role: string }) {
                 >
                   <Avatar className="h-8 w-8 rounded-lg">
                     <AvatarImage
-                      src={session?.user?.image || ''}
-                      alt={session?.user?.name || ''}
+                      // src={session?.user?.image || ''}
+                      src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                      alt={full_name || ''}
                     />
                     <AvatarFallback className="rounded-lg">
-                      {session?.user?.name?.slice(0, 2)?.toUpperCase() || 'CN'}
+                      {full_name.slice(0, 2)?.toUpperCase() || 'CN'}
                     </AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-semibold">
-                      {session?.user?.name || ''}
+                      {full_name || ''}
                     </span>
-                    <span className="truncate text-xs">
-                      {session?.user?.email || ''}
-                    </span>
+                    <span className="truncate text-xs">{email || ''}</span>
                   </div>
                   <ChevronsUpDown className="ml-auto size-4" />
                 </SidebarMenuButton>
@@ -180,22 +169,19 @@ export default function AppSidebar({ role }: { role: string }) {
                   <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                     <Avatar className="h-8 w-8 rounded-lg">
                       <AvatarImage
-                        src={session?.user?.image || ''}
-                        alt={session?.user?.name || ''}
+                        // src={session?.user?.image || ''}
+                        src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                        alt={full_name || ''}
                       />
                       <AvatarFallback className="rounded-lg">
-                        {session?.user?.name?.slice(0, 2)?.toUpperCase() ||
-                          'CN'}
+                        {full_name?.slice(0, 2)?.toUpperCase() || 'CN'}
                       </AvatarFallback>
                     </Avatar>
                     <div className="grid flex-1 text-left text-sm leading-tight">
                       <span className="truncate font-semibold">
-                        {session?.user?.name || ''}
+                        {full_name || ''}
                       </span>
-                      <span className="truncate text-xs">
-                        {' '}
-                        {session?.user?.email || ''}
-                      </span>
+                      <span className="truncate text-xs"> {email || ''}</span>
                     </div>
                   </div>
                 </DropdownMenuLabel>
@@ -216,12 +202,7 @@ export default function AppSidebar({ role }: { role: string }) {
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  onClick={() => {
-                    console.log('___signOut__3');
-                    // signOut();
-                  }}
-                >
+                <DropdownMenuItem onClick={() => signOutAction()}>
                   <LogOut />
                   &nbsp; Log out
                 </DropdownMenuItem>

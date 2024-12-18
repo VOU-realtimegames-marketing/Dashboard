@@ -1,18 +1,16 @@
-import AppSidebar from '@/components/layout/app-sidebar';
 import Header from '@/components/layout/header';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import type { Metadata } from 'next';
-import { useSession } from 'next-auth/react';
-import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
-import ClientRoleHandler from '@/components/layout/client-role-handler';
+import { auth } from '@/lib/auth';
+import AppSidebar from '@/components/layout/app-sidebar';
 
 export const metadata: Metadata = {
   title: 'Next Shadcn Dashboard Starter',
   description: 'Basic dashboard with Next.js and Shadcn'
 };
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children
 }: {
   children: React.ReactNode;
@@ -20,18 +18,17 @@ export default function DashboardLayout({
   // Persisting the sidebar state in the cookie.
   const cookieStore = cookies();
   const defaultOpen = cookieStore.get('sidebar:state')?.value === 'true';
+  const session = await auth();
 
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
-      <ClientRoleHandler>
-        {/* <AppSidebar /> */}
-        <SidebarInset>
-          <Header />
-          {/* page main content */}
-          {children}
-          {/* page main content ends */}
-        </SidebarInset>
-      </ClientRoleHandler>
+      <AppSidebar session={session} />
+      <SidebarInset>
+        <Header />
+        {/* page main content */}
+        {children}
+        {/* page main content ends */}
+      </SidebarInset>
     </SidebarProvider>
   );
 }

@@ -1,6 +1,35 @@
 import { NavItem } from '@/types';
 
+//   user: {
+//     username: 'demo',
+//     full_name: 'Haha Cuong',
+//     email: 'demo@example.com',
+//     role: 'user',
+//     password_changed_at: '0001-01-01T00:00:00Z',
+//     created_at: '2024-12-15T07:03:26.086298Z'
+//   }
+// }
+
+// define enum for role
+export enum Role {
+  Admin = 'admin',
+  Partner = 'partner'
+}
+
 export type User = {
+  username: string;
+  full_name: string;
+  email: string;
+  role: Role;
+  password_changed_at: Date;
+  created_at: Date;
+};
+
+export type Session = {
+  user: User;
+};
+
+export type TestUser = {
   id: number;
   name: string;
   company: string;
@@ -8,7 +37,7 @@ export type User = {
   verified: boolean;
   status: string;
 };
-export const users: User[] = [
+export const users: TestUser[] = [
   {
     id: 1,
     name: 'Candice Schiner',
@@ -172,7 +201,7 @@ export const navItems: NavItem[] = [
 export const adminNavItems: NavItem[] = [
   {
     title: 'Dashboard',
-    url: '/dashboard/admin/overview',
+    url: '/admin/dashboard',
     icon: 'dashboard',
     isActive: false,
     shortcut: ['d', 'd'],
@@ -180,7 +209,7 @@ export const adminNavItems: NavItem[] = [
   },
   {
     title: 'Employee',
-    url: '/dashboard/admin/employee',
+    url: '/admin/employee',
     icon: 'user',
     shortcut: ['e', 'e'],
     isActive: false,
@@ -188,7 +217,7 @@ export const adminNavItems: NavItem[] = [
   },
   {
     title: 'Product',
-    url: '/dashboard/admin/product',
+    url: '/admin/product',
     icon: 'product',
     shortcut: ['p', 'p'],
     isActive: false,
@@ -196,7 +225,7 @@ export const adminNavItems: NavItem[] = [
   },
   {
     title: 'Example',
-    url: '/dashboard/admin/example',
+    url: '/admin/example',
     icon: 'example_icon',
     shortcut: ['p', 'p'],
     isActive: false,
@@ -211,7 +240,7 @@ export const adminNavItems: NavItem[] = [
     items: [
       {
         title: 'Profile',
-        url: '/dashboard/admin/profile',
+        url: '/admin/profile',
         icon: 'userPen',
         shortcut: ['m', 'm']
       },
@@ -228,7 +257,7 @@ export const adminNavItems: NavItem[] = [
 export const partnerNavItems: NavItem[] = [
   {
     title: 'Dashboard',
-    url: '/dashboard/partner/overview',
+    url: '/partner/dashboard',
     icon: 'dashboard',
     isActive: false,
     shortcut: ['d', 'd'],
@@ -236,7 +265,7 @@ export const partnerNavItems: NavItem[] = [
   },
   {
     title: 'Employee',
-    url: '/dashboard/partner/employee',
+    url: '/partner/employee',
     icon: 'user',
     shortcut: ['e', 'e'],
     isActive: false,
@@ -244,7 +273,7 @@ export const partnerNavItems: NavItem[] = [
   },
   {
     title: 'Product',
-    url: '/dashboard/partner/product',
+    url: '/partner/product',
     icon: 'product',
     shortcut: ['p', 'p'],
     isActive: false,
@@ -259,7 +288,7 @@ export const partnerNavItems: NavItem[] = [
     items: [
       {
         title: 'Profile',
-        url: '/dashboard/partner/profile',
+        url: '/partner/profile',
         icon: 'userPen',
         shortcut: ['m', 'm']
       },

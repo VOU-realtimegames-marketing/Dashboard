@@ -9,8 +9,10 @@ import {
   FormMessage
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { signUpAction } from '@/lib/action';
 import { signupFormSchema, UserSignupFormValue } from '@/lib/form-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { ca } from 'date-fns/locale';
 import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -22,16 +24,17 @@ export default function SignUpForm() {
   });
 
   const onSubmit = async (data: UserSignupFormValue) => {
-    startTransition(() => {
-      // signIn('credentials', {
-      //   fullName: data.fullName,
-      //   email: data.email,
-      //   username: data.username,
-      //   password: data.password,
-      //   role: 'partner',
-      //   callbackUrl: callbackUrl ?? '/dashboard'
-      // });
-      toast.success('Signed In Successfully!');
+    startTransition(async () => {
+      try {
+        await signUpAction(data);
+        toast.success('Signed Up Successfully! Please login now.');
+      } catch (err) {
+        if (err instanceof Error) {
+          toast.error(err.message);
+        } else {
+          toast.error('An unexpected error occurred');
+        }
+      }
     });
   };
 

@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import bg from '@/public/auth-pic.jpg';
+import { auth } from '@/lib/auth';
+import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Authentication | Sign In',
@@ -12,23 +14,16 @@ export default async function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const session = { user: { role: 'admin' } };
-  // // console.log('___session', session?.user);
-  // if (!session?.user) {
-  //   // Nếu không có session, hiển thị trang đăng nhập
-  //   return <SignInViewPage />;
-  // } else {
-  //   // Kiểm tra role và điều hướng đến route tương ứng
-  //   const role = session.user.role;
-  //   if (role === 'admin') {
-  //     redirect('/dashboard/admin/overview');
-  //   } else if (role === 'partner') {
-  //     redirect('/dashboard/partner/overview');
-  //   } else {
-  //     // Nếu role không hợp lệ, điều hướng về trang chính hoặc thông báo lỗi
-  //     return <SignInViewPage />;
-  //   }
-  // }
+  const session = await auth();
+  if (session?.user) {
+    const { role } = session.user;
+    if (role === 'admin') {
+      redirect('/admin/dashboard');
+    } else if (role === 'partner') {
+      redirect('/partner/dashboard');
+    }
+  }
+
   return (
     <div className="container relative flex h-screen max-w-none flex-col items-center justify-center md:grid md:grid-cols-2 md:px-0">
       <div className="relative col-span-1 h-full bg-muted p-10 text-white max-[768px]:hidden dark:border-r">
