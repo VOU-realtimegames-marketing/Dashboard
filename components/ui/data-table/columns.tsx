@@ -4,8 +4,11 @@ import { ColumnDef } from '@tanstack/react-table';
 
 import { Checkbox } from '@/components/ui/checkbox';
 
-import { priorities, statuses } from '../_data/data';
-import { Testcase } from '../_data/schema';
+import {
+  priorities,
+  statuses
+} from '../../../app/(app)/partner/stores/_data/data';
+import { Testcase } from '../../../app/(app)/partner/stores/_data/schema';
 import { DataTableColumnHeader } from './data-table-column-header';
 import { DataTableRowActions } from './data-table-row-actions';
 import { Badge } from '@/components/ui/badge';

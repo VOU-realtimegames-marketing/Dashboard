@@ -18,10 +18,10 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 
-import { statuses } from '../_data/data';
-import { priorities } from '../_data/data';
+import { statuses } from '../../../app/(app)/partner/stores/_data/data';
+import { priorities } from '../../../app/(app)/partner/stores/_data/data';
 
-import { testCaseSchema } from '../_data/schema';
+import { testCaseSchema } from '../../../app/(app)/partner/stores/_data/schema';
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
