@@ -267,7 +267,15 @@ export const partnerNavItems: NavItem[] = [
     title: 'Employee',
     url: '/partner/employee',
     icon: 'user',
-    shortcut: ['e', 'e'],
+    shortcut: ['p', 'e'],
+    isActive: false,
+    items: [] // No child items
+  },
+  {
+    title: 'Stores',
+    url: '/partner/stores',
+    icon: 'store',
+    shortcut: ['p', 's'],
     isActive: false,
     items: [] // No child items
   },
