@@ -1,15 +1,16 @@
 'use client';
 
 import { useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+
 import { Row } from '@tanstack/react-table';
-import { MoreHorizontal } from 'lucide-react';
+import { Edit, Eye, MoreHorizontal, Trash } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuShortcut,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { storeSchema } from '../_data/schema';
@@ -25,6 +26,8 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions<TData>({
   row
 }: DataTableRowActionsProps<TData>) {
+  const router = useRouter();
+  const pathname = usePathname();
   const store = storeSchema.parse(row.original);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -48,13 +51,21 @@ export function DataTableRowActions<TData>({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[160px]">
+          <DropdownMenuItem
+            onClick={() => router.push(`${pathname}/${row.getValue('id')}`)}
+          >
+            <Eye className="mr-2 h-4 w-4" />
+            View details
+          </DropdownMenuItem>
+
           <DropdownMenuItem onClick={() => setIsEditOpen(true)}>
+            <Edit className="mr-2 h-4 w-4" />
             Edit
           </DropdownMenuItem>
 
           <DropdownMenuItem onClick={() => setIsDeleteOpen(true)}>
+            <Trash className="mr-2 h-4 w-4" />
             Delete
-            <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
