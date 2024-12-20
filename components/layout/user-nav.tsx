@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { Session } from '@/constants/data';
-import { signOutAction } from '@/lib/action/action';
+import { signOutAction } from '@/lib/action/auth';
 
 export function UserNav({ session }: { session: Session }) {
   const { full_name, email } = session.user;

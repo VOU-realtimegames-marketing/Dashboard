@@ -7,4 +7,11 @@ export const storeSchema = z.object({
   business_type: z.string()
 });
 
-export type Store = z.infer<typeof storeSchema>;
+export type StoreValue = z.infer<typeof storeSchema>;
+
+export const createEditStoreSchema = z.object({
+  name: z.string().min(1),
+  business_type: z.string().min(1)
+});
+
+export type CreateEditStoreValue = z.infer<typeof createEditStoreSchema>;

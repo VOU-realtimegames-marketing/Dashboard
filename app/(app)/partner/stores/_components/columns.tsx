@@ -4,11 +4,11 @@ import { ColumnDef } from '@tanstack/react-table';
 
 import { Checkbox } from '@/components/ui/checkbox';
 
-import { Store } from '../_data/schema';
+import { StoreValue } from '../_data/schema';
 import { DataTableColumnHeader } from './data-table-column-header';
 import { DataTableRowActions } from './data-table-row-actions';
 
-export const columns: ColumnDef<Store>[] = [
+export const columns: ColumnDef<StoreValue>[] = [
   {
     id: 'select',
     header: ({ table }) => (

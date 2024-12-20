@@ -14,7 +14,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { signInAction } from '@/lib/action/action';
+import { signInAction } from '@/lib/action/auth';
 
 export default function LoginForm() {
   const [loading, startTransition] = useTransition();
