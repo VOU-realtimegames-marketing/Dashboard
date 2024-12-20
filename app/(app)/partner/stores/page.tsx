@@ -2,9 +2,9 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { z } from 'zod';
 
-import { columns } from '@/components/ui/data-table/columns';
-import { DataTable } from '@/components/ui/data-table/data-table';
-import { testCaseSchema } from './_data/schema';
+import { columns } from '@/app/(app)/partner/stores/_components/columns';
+import { DataTable } from '@/app/(app)/partner/stores/_components/data-table';
+import { storeSchema } from './_data/schema';
 import PageContainer from '@/components/layout/page-container';
 import { Heading } from '@/components/ui/heading';
 import Link from 'next/link';
@@ -19,12 +19,12 @@ export const metadata = {
 
 async function getData() {
   const data = await fs.readFile(
-    path.join(process.cwd(), 'app/(app)/partner/stores/_data/test-case.json')
+    path.join(process.cwd(), 'app/(app)/partner/stores/_data/stores.json')
   );
 
-  const testCases = JSON.parse(data.toString());
+  const stores = JSON.parse(data.toString());
 
-  return z.array(testCaseSchema).parse(testCases);
+  return z.array(storeSchema).parse(stores);
 }
 
 export default async function StoresPage() {

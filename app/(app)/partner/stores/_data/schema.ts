@@ -1,10 +1,10 @@
 import { z } from 'zod';
 
-export const testCaseSchema = z.object({
+export const storeSchema = z.object({
   id: z.string(),
-  title: z.string(),
-  status: z.string(),
-  priority: z.enum(['low', 'medium', 'high'])
+  name: z.string(),
+  owner: z.string(),
+  business_type: z.string()
 });
 
-export type Testcase = z.infer<typeof testCaseSchema>;
+export type Store = z.infer<typeof storeSchema>;

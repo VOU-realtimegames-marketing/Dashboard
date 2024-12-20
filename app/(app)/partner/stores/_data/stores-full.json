@@ -1,0 +1,602 @@
+[
+  {
+    "id": "469",
+    "name": "immersive",
+    "owner": "Elenora",
+    "business_type": "Grocery"
+  },
+  {
+    "id": "71",
+    "name": "world-class",
+    "owner": "Meta",
+    "business_type": "Music"
+  },
+  {
+    "id": "555",
+    "name": "immersive",
+    "owner": "Cody",
+    "business_type": "Clothing"
+  },
+  {
+    "id": "215",
+    "name": "ubiquitous",
+    "owner": "Gwen",
+    "business_type": "Computers"
+  },
+  {
+    "id": "601",
+    "name": "vertical",
+    "owner": "Maurice",
+    "business_type": "Health"
+  },
+  {
+    "id": "882",
+    "name": "vertical",
+    "owner": "Juvenal",
+    "business_type": "Tools"
+  },
+  {
+    "id": "904",
+    "name": "holistic",
+    "owner": "Alvera",
+    "business_type": "Tools"
+  },
+  {
+    "id": "957",
+    "name": "out-of-the-box",
+    "owner": "Hope",
+    "business_type": "Games"
+  },
+  {
+    "id": "879",
+    "name": "best-of-breed",
+    "owner": "Alex",
+    "business_type": "Jewelry"
+  },
+  {
+    "id": "982",
+    "name": "AI-driven",
+    "owner": "Celestine",
+    "business_type": "Grocery"
+  },
+  {
+    "id": "368",
+    "name": "quantum",
+    "owner": "Autumn",
+    "business_type": "Electronics"
+  },
+  {
+    "id": "347",
+    "name": "interactive",
+    "owner": "Eino",
+    "business_type": "Clothing"
+  },
+  {
+    "id": "556",
+    "name": "proactive",
+    "owner": "Evangeline",
+    "business_type": "Toys"
+  },
+  {
+    "id": "610",
+    "name": "granular",
+    "owner": "Brady",
+    "business_type": "Shoes"
+  },
+  {
+    "id": "950",
+    "name": "sustainable",
+    "owner": "Marlin",
+    "business_type": "Baby"
+  },
+  {
+    "id": "628",
+    "name": "plug-and-play",
+    "owner": "Theron",
+    "business_type": "Outdoors"
+  },
+  {
+    "id": "715",
+    "name": "killer",
+    "owner": "Ismael",
+    "business_type": "Sports"
+  },
+  {
+    "id": "573",
+    "name": "B2B",
+    "owner": "Reynold",
+    "business_type": "Books"
+  },
+  {
+    "id": "192",
+    "name": "B2B",
+    "owner": "Twila",
+    "business_type": "Grocery"
+  },
+  {
+    "id": "525",
+    "name": "cross-media",
+    "owner": "Macey",
+    "business_type": "Tools"
+  },
+  {
+    "id": "932",
+    "name": "one-to-one",
+    "owner": "Ozella",
+    "business_type": "Clothing"
+  },
+  {
+    "id": "385",
+    "name": "immersive",
+    "owner": "Sim",
+    "business_type": "Grocery"
+  },
+  {
+    "id": "312",
+    "name": "cutting-edge",
+    "owner": "Samanta",
+    "business_type": "Home"
+  },
+  {
+    "id": "447",
+    "name": "sustainable",
+    "owner": "Selmer",
+    "business_type": "Grocery"
+  },
+  {
+    "id": "665",
+    "name": "ubiquitous",
+    "owner": "Rosetta",
+    "business_type": "Jewelry"
+  },
+  {
+    "id": "982",
+    "name": "next-generation",
+    "owner": "Zoie",
+    "business_type": "Health"
+  },
+  {
+    "id": "663",
+    "name": "one-to-one",
+    "owner": "Elwin",
+    "business_type": "Outdoors"
+  },
+  {
+    "id": "39",
+    "name": "viral",
+    "owner": "Eriberto",
+    "business_type": "Games"
+  },
+  {
+    "id": "752",
+    "name": "enterprise",
+    "owner": "Enos",
+    "business_type": "Clothing"
+  },
+  {
+    "id": "470",
+    "name": "efficient",
+    "owner": "Mitchell",
+    "business_type": "Movies"
+  },
+  {
+    "id": "377",
+    "name": "robust",
+    "owner": "Marian",
+    "business_type": "Computers"
+  },
+  {
+    "id": "821",
+    "name": "visionary",
+    "owner": "Carley",
+    "business_type": "Home"
+  },
+  {
+    "id": "932",
+    "name": "cross-media",
+    "owner": "Ruby",
+    "business_type": "Books"
+  },
+  {
+    "id": "352",
+    "name": "B2B",
+    "owner": "Cortez",
+    "business_type": "Shoes"
+  },
+  {
+    "id": "427",
+    "name": "synergistic",
+    "owner": "Gayle",
+    "business_type": "Clothing"
+  },
+  {
+    "id": "870",
+    "name": "out-of-the-box",
+    "owner": "Griffin",
+    "business_type": "Sports"
+  },
+  {
+    "id": "400",
+    "name": "integrated",
+    "owner": "Damion",
+    "business_type": "Garden"
+  },
+  {
+    "id": "272",
+    "name": "end-to-end",
+    "owner": "Elisabeth",
+    "business_type": "Books"
+  },
+  {
+    "id": "324",
+    "name": "real-time",
+    "owner": "Myra",
+    "business_type": "Movies"
+  },
+  {
+    "id": "242",
+    "name": "scalable",
+    "owner": "Weston",
+    "business_type": "Clothing"
+  },
+  {
+    "id": "575",
+    "name": "virtual",
+    "owner": "Jayme",
+    "business_type": "Computers"
+  },
+  {
+    "id": "980",
+    "name": "dynamic",
+    "owner": "Mavis",
+    "business_type": "Baby"
+  },
+  {
+    "id": "286",
+    "name": "smart",
+    "owner": "Clint",
+    "business_type": "Outdoors"
+  },
+  {
+    "id": "377",
+    "name": "back-end",
+    "owner": "Antoinette",
+    "business_type": "Movies"
+  },
+  {
+    "id": "29",
+    "name": "holistic",
+    "owner": "Celestine",
+    "business_type": "Garden"
+  },
+  {
+    "id": "958",
+    "name": "next-generation",
+    "owner": "Jerel",
+    "business_type": "Health"
+  },
+  {
+    "id": "567",
+    "name": "killer",
+    "owner": "Zoila",
+    "business_type": "Health"
+  },
+  {
+    "id": "768",
+    "name": "value-added",
+    "owner": "Bianka",
+    "business_type": "Baby"
+  },
+  {
+    "id": "763",
+    "name": "leading-edge",
+    "owner": "Freddy",
+    "business_type": "Home"
+  },
+  {
+    "id": "353",
+    "name": "transparent",
+    "owner": "Itzel",
+    "business_type": "Jewelry"
+  },
+  {
+    "id": "224",
+    "name": "front-end",
+    "owner": "Pasquale",
+    "business_type": "Sports"
+  },
+  {
+    "id": "627",
+    "name": "real-time",
+    "owner": "Manuel",
+    "business_type": "Clothing"
+  },
+  {
+    "id": "26",
+    "name": "innovative",
+    "owner": "Lavada",
+    "business_type": "Industrial"
+  },
+  {
+    "id": "192",
+    "name": "robust",
+    "owner": "Therese",
+    "business_type": "Baby"
+  },
+  {
+    "id": "455",
+    "name": "sticky",
+    "owner": "Elda",
+    "business_type": "Electronics"
+  },
+  {
+    "id": "27",
+    "name": "mission-critical",
+    "owner": "Orval",
+    "business_type": "Health"
+  },
+  {
+    "id": "239",
+    "name": "user-centric",
+    "owner": "Cordelia",
+    "business_type": "Music"
+  },
+  {
+    "id": "205",
+    "name": "next-generation",
+    "owner": "Dejah",
+    "business_type": "Garden"
+  },
+  {
+    "id": "401",
+    "name": "best-of-breed",
+    "owner": "Elvie",
+    "business_type": "Garden"
+  },
+  {
+    "id": "186",
+    "name": "quantum",
+    "owner": "Melvin",
+    "business_type": "Kids"
+  },
+  {
+    "id": "615",
+    "name": "magnetic",
+    "owner": "Arnoldo",
+    "business_type": "Garden"
+  },
+  {
+    "id": "227",
+    "name": "smart",
+    "owner": "Dessie",
+    "business_type": "Toys"
+  },
+  {
+    "id": "88",
+    "name": "open-source",
+    "owner": "Rosie",
+    "business_type": "Home"
+  },
+  {
+    "id": "640",
+    "name": "open-source",
+    "owner": "Cornell",
+    "business_type": "Toys"
+  },
+  {
+    "id": "113",
+    "name": "leading-edge",
+    "owner": "Anya",
+    "business_type": "Shoes"
+  },
+  {
+    "id": "325",
+    "name": "out-of-the-box",
+    "owner": "Gerry",
+    "business_type": "Baby"
+  },
+  {
+    "id": "754",
+    "name": "sticky",
+    "owner": "Nichole",
+    "business_type": "Jewelry"
+  },
+  {
+    "id": "158",
+    "name": "visionary",
+    "owner": "Maxwell",
+    "business_type": "Garden"
+  },
+  {
+    "id": "49",
+    "name": "AI-driven",
+    "owner": "Marcella",
+    "business_type": "Kids"
+  },
+  {
+    "id": "630",
+    "name": "24/7",
+    "owner": "Haylee",
+    "business_type": "Computers"
+  },
+  {
+    "id": "653",
+    "name": "ubiquitous",
+    "owner": "Jettie",
+    "business_type": "Jewelry"
+  },
+  {
+    "id": "538",
+    "name": "transparent",
+    "owner": "Consuelo",
+    "business_type": "Home"
+  },
+  {
+    "id": "268",
+    "name": "quantum",
+    "owner": "Jordyn",
+    "business_type": "Automotive"
+  },
+  {
+    "id": "964",
+    "name": "granular",
+    "owner": "Martina",
+    "business_type": "Jewelry"
+  },
+  {
+    "id": "405",
+    "name": "holistic",
+    "owner": "Maureen",
+    "business_type": "Beauty"
+  },
+  {
+    "id": "209",
+    "name": "sustainable",
+    "owner": "Nolan",
+    "business_type": "Garden"
+  },
+  {
+    "id": "529",
+    "name": "user-centric",
+    "owner": "Marcella",
+    "business_type": "Kids"
+  },
+  {
+    "id": "743",
+    "name": "sustainable",
+    "owner": "Carmel",
+    "business_type": "Computers"
+  },
+  {
+    "id": "100",
+    "name": "innovative",
+    "owner": "Gerald",
+    "business_type": "Health"
+  },
+  {
+    "id": "927",
+    "name": "virtual",
+    "owner": "Conrad",
+    "business_type": "Games"
+  },
+  {
+    "id": "262",
+    "name": "cutting-edge",
+    "owner": "Marcelo",
+    "business_type": "Home"
+  },
+  {
+    "id": "358",
+    "name": "magnetic",
+    "owner": "Krystina",
+    "business_type": "Home"
+  },
+  {
+    "id": "408",
+    "name": "dynamic",
+    "owner": "Johnson",
+    "business_type": "Movies"
+  },
+  {
+    "id": "743",
+    "name": "interactive",
+    "owner": "Alexandra",
+    "business_type": "Games"
+  },
+  {
+    "id": "937",
+    "name": "cross-platform",
+    "owner": "Mckenzie",
+    "business_type": "Garden"
+  },
+  {
+    "id": "865",
+    "name": "turn-key",
+    "owner": "Dena",
+    "business_type": "Beauty"
+  },
+  {
+    "id": "235",
+    "name": "viral",
+    "owner": "Beatrice",
+    "business_type": "Home"
+  },
+  {
+    "id": "639",
+    "name": "B2B",
+    "owner": "Ron",
+    "business_type": "Sports"
+  },
+  {
+    "id": "209",
+    "name": "cross-media",
+    "owner": "Levi",
+    "business_type": "Garden"
+  },
+  {
+    "id": "747",
+    "name": "robust",
+    "owner": "Joseph",
+    "business_type": "Electronics"
+  },
+  {
+    "id": "385",
+    "name": "customized",
+    "owner": "Marjory",
+    "business_type": "Baby"
+  },
+  {
+    "id": "128",
+    "name": "best-of-breed",
+    "owner": "Kavon",
+    "business_type": "Baby"
+  },
+  {
+    "id": "139",
+    "name": "virtual",
+    "owner": "Onie",
+    "business_type": "Computers"
+  },
+  {
+    "id": "723",
+    "name": "visionary",
+    "owner": "Malachi",
+    "business_type": "Grocery"
+  },
+  {
+    "id": "726",
+    "name": "granular",
+    "owner": "Mayra",
+    "business_type": "Clothing"
+  },
+  {
+    "id": "80",
+    "name": "interactive",
+    "owner": "Brown",
+    "business_type": "Garden"
+  },
+  {
+    "id": "570",
+    "name": "scalable",
+    "owner": "Marquis",
+    "business_type": "Grocery"
+  },
+  {
+    "id": "733",
+    "name": "rich",
+    "owner": "Terrell",
+    "business_type": "Grocery"
+  },
+  {
+    "id": "866",
+    "name": "proactive",
+    "owner": "Nels",
+    "business_type": "Toys"
+  },
+  {
+    "id": "147",
+    "name": "turn-key",
+    "owner": "Agustina",
+    "business_type": "Beauty"
+  }
+]

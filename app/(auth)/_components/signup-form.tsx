@@ -9,7 +9,7 @@ import {
   FormMessage
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { signUpAction } from '@/lib/action';
+import { signUpAction } from '@/lib/action/action';
 import { signupFormSchema, UserSignupFormValue } from '@/lib/form-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ca } from 'date-fns/locale';

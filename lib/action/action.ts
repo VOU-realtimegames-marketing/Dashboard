@@ -2,7 +2,7 @@
 
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { UserLoginFormValue, UserSignupFormValue } from './form-schema';
+import { UserLoginFormValue, UserSignupFormValue } from '../form-schema';
 
 export async function signInAction(data: UserLoginFormValue) {
   const cookieStore = cookies();

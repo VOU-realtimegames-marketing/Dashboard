@@ -43,7 +43,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import * as React from 'react';
 import { Icons } from '../icons';
-import { signOutAction } from '@/lib/action';
+import { signOutAction } from '@/lib/action/action';
 
 export const company = {
   name: 'VOU Realtime Game',

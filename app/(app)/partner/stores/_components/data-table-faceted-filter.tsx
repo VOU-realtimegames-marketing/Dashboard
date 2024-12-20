@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Column } from '@tanstack/react-table';
-import { Check, LucideProps, PlusCircle } from 'lucide-react';
+import { Check, PlusCircle } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
@@ -21,20 +21,14 @@ import {
 } from '@/components/ui/popover';
 import { Separator } from '@/components/ui/separator';
 
-interface Option {
-  label: string;
-  value: string;
-  // icon?: React.ComponentType<{ className?: string }>;
-  icon?: React.ForwardRefExoticComponent<
-    Omit<LucideProps, 'ref'> & React.RefAttributes<SVGSVGElement>
-  >;
-  color?: string;
-}
-
 interface DataTableFacetedFilterProps<TData, TValue> {
   column?: Column<TData, TValue>;
   title?: string;
-  options: Option[];
+  options: {
+    label: string;
+    value: string;
+    icon?: React.ComponentType<{ className?: string }>;
+  }[];
 }
 
 export function DataTableFacetedFilter<TData, TValue>({
@@ -49,7 +43,7 @@ export function DataTableFacetedFilter<TData, TValue>({
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="outline" size="sm" className="h-8 border-dashed">
-          <PlusCircle className="mr-2 h-4 w-4" />
+          <PlusCircle />
           {title}
           {selectedValues?.size > 0 && (
             <>
@@ -60,7 +54,7 @@ export function DataTableFacetedFilter<TData, TValue>({
               >
                 {selectedValues.size}
               </Badge>
-              <div className="space-x-1 lg:flex">
+              <div className="hidden space-x-1 lg:flex">
                 {selectedValues.size > 2 ? (
                   <Badge
                     variant="secondary"
@@ -120,12 +114,9 @@ export function DataTableFacetedFilter<TData, TValue>({
                       <Check />
                     </div>
                     {option.icon && (
-                      <option.icon
-                        className="mr-2 h-4 w-4 text-muted-foreground"
-                        color={option?.color}
-                      />
+                      <option.icon className="mr-2 h-4 w-4 text-muted-foreground" />
                     )}
-                    <span style={{ color: option?.color }}>{option.label}</span>
+                    <span>{option.label}</span>
                     {facets?.get(option.value) && (
                       <span className="ml-auto flex h-4 w-4 items-center justify-center font-mono text-xs">
                         {facets.get(option.value)}
