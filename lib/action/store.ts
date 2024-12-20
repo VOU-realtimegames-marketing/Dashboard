@@ -24,6 +24,6 @@ export async function createStoreAction(data: CreateEditStoreValue) {
     throw new Error('Failed to create store');
   }
 
-  const store = await response.json();
-  console.log(store);
+  // const store = await response.json();
+  // console.log(store);
 }

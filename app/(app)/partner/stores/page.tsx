@@ -13,6 +13,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import AddStoreDialog from './_components/add-store-dialog';
+import { getStoresOfOwner } from '@/lib/store';
 
 export const metadata = {
   title: 'VOU | Stores'
@@ -29,7 +30,8 @@ async function getData() {
 }
 
 export default async function StoresPage() {
-  const data = await getData();
+  // const data = await getData();
+  const { stores } = await getStoresOfOwner();
 
   return (
     <PageContainer scrollable>
@@ -40,7 +42,7 @@ export default async function StoresPage() {
           <AddStoreDialog />
         </div>
         <Separator />
-        <DataTable columns={columns} data={data} />
+        <DataTable columns={columns} data={stores} />
       </div>
     </PageContainer>
   );

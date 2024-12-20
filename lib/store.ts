@@ -1,13 +1,28 @@
-import { create } from 'zustand';
-import { v4 as uuid } from 'uuid';
-import { persist } from 'zustand/middleware';
-import { UniqueIdentifier } from '@dnd-kit/core';
+import { StoreValue } from '@/app/(app)/partner/stores/_data/schema';
+import { cookies } from 'next/headers';
 
-export type Status = 'TODO' | 'IN_PROGRESS' | 'DONE';
-
-export type Task = {
-  id: string;
-  title: string;
-  description?: string;
-  status: Status;
+type Stores = {
+  stores: StoreValue[];
 };
+
+export async function getStoresOfOwner(): Promise<Stores> {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('accessToken')?.value;
+  const refreshToken = cookieStore.get('refreshToken')?.value;
+
+  const response = await fetch(`${process.env.API_GATEWAY_URL}/api/v1/stores`, {
+    method: 'GET',
+    headers: {
+      cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`
+    },
+    next: { revalidate: 3600 }
+  });
+
+  if (!response.ok) {
+    return { stores: [] };
+  }
+
+  const stores = await response.json();
+  console.log(stores);
+  return stores;
+}
