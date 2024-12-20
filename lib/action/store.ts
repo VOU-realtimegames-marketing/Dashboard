@@ -54,3 +54,27 @@ export async function updateStoreAction(data: StoreValue) {
 
   revalidatePath('/partner/stores');
 }
+
+export async function deleteStoreAction(data: StoreValue) {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('accessToken')?.value;
+  const refreshToken = cookieStore.get('refreshToken')?.value;
+
+  const response = await fetch(
+    `${process.env.API_GATEWAY_URL}/api/v1/stores/${data.id}`,
+    {
+      method: 'DELETE',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+        cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`
+      }
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to delete store');
+  }
+
+  revalidatePath('/partner/stores');
+}

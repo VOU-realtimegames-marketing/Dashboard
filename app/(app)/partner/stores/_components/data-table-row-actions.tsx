@@ -14,7 +14,9 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { storeSchema } from '../_data/schema';
 import { Dialog } from '@radix-ui/react-dialog';
+import { AlertDialog } from '@/components/ui/alert-dialog';
 import EditStoreDialog from './edit-store-dialog';
+import DeleteStoreDialog from './delete-store-dialog';
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -32,6 +34,9 @@ export function DataTableRowActions<TData>({
       <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
         <EditStoreDialog store={store} setIsOpen={setIsEditOpen} />
       </Dialog>
+      <AlertDialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
+        <DeleteStoreDialog store={store} setIsOpen={setIsDeleteOpen} />
+      </AlertDialog>
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
           <Button
@@ -43,11 +48,11 @@ export function DataTableRowActions<TData>({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[160px]">
-          <DropdownMenuItem onSelect={() => setIsEditOpen(true)}>
+          <DropdownMenuItem onClick={() => setIsEditOpen(true)}>
             Edit
           </DropdownMenuItem>
 
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setIsDeleteOpen(true)}>
             Delete
             <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
           </DropdownMenuItem>
