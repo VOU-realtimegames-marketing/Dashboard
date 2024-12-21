@@ -7,8 +7,8 @@ import AppSidebar from '@/components/layout/app-sidebar';
 import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
-  title: 'Next Shadcn Dashboard Starter',
-  description: 'Basic dashboard with Next.js and Shadcn'
+  title: 'VOU Realtime Game Marketing',
+  description: 'Website for counterparties to manage their games and campaigns.'
 };
 
 export default async function DashboardLayout({

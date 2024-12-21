@@ -31,7 +31,7 @@ async function getData() {
 
 export default async function StoresPage() {
   // const data = await getData();
-  const { stores } = await getStoresOfOwner();
+  const { stores = [] } = await getStoresOfOwner();
 
   return (
     <PageContainer scrollable>

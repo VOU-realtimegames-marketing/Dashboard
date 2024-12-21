@@ -6,8 +6,8 @@ import './globals.css';
 import ThemeProvider from '@/components/layout/ThemeToggle/theme-provider';
 
 export const metadata: Metadata = {
-  title: 'Next Shadcn',
-  description: 'Basic dashboard with Next.js and Shadcn'
+  title: 'VOU Realtime Game Marketing',
+  description: 'Website for counterparties to manage their games and campaigns.'
 };
 
 const lato = Lato({
