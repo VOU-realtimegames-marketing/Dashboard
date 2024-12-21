@@ -9,8 +9,7 @@ import {
   useMap,
   useMapEvents
 } from 'react-leaflet';
-// import { useCities } from '../contexts/CitiesContext';
-import { MapPosition } from '../_data/schema';
+import { Branch, MapPosition } from '../_data/schema';
 import { useGeolocation } from '@/hooks/use-geolocation';
 import { useMapPosition } from '@/contexts/MapPositionContext';
 import Button from './map-button';
@@ -20,9 +19,8 @@ import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import './map.style.css';
 
-function Map() {
-  // const { cities } = useCities();
-  const { mapPosition, setMapPosition } = useMapPosition();
+function Map({ branchs }: { branchs: Branch[] }) {
+  const { mapPosition, setMapPosition, setIsClickMap } = useMapPosition();
 
   const {
     isLoading: isLoadingPosition,
@@ -57,19 +55,24 @@ function Map() {
           url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
         />
 
-        {/* {cities.map((city) => (
+        {branchs.map((branch) => (
           <Marker
-            position={[city.position.lat, city.position.lng]}
-            key={city.id}
+            position={
+              branch.position.split(',').map(Number) as [number, number]
+            }
+            key={branch.id}
           >
             <Popup>
-              <span>{city.emoji}</span> <span>{city.cityName}</span>
+              <span>{branch.emoji}</span> <span>{branch.address}</span>
             </Popup>
           </Marker>
-        ))} */}
+        ))}
 
         <ChangeCenter position={mapPosition} />
-        <DetectClick setMapPosition={setMapPosition} />
+        <DetectClick
+          setMapPosition={setMapPosition}
+          setIsClickMap={setIsClickMap}
+        />
       </MapContainer>
     </div>
   );
@@ -82,12 +85,17 @@ function ChangeCenter({ position }: { position: MapPosition }) {
 }
 
 function DetectClick({
-  setMapPosition
+  setMapPosition,
+  setIsClickMap
 }: {
   setMapPosition: (position: MapPosition) => void;
+  setIsClickMap: (is: Boolean) => void;
 }) {
   useMapEvents({
-    click: (e) => setMapPosition([e.latlng.lat, e.latlng.lng])
+    click: (e) => {
+      setMapPosition([e.latlng.lat, e.latlng.lng]);
+      setIsClickMap(true);
+    }
   });
   return null;
 }

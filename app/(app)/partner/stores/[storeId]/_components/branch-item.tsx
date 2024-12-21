@@ -4,12 +4,17 @@ import { useMapPosition } from '@/contexts/MapPositionContext';
 import { Branch } from '../_data/schema';
 
 function BranchItem({ branch }: { branch: Branch }) {
-  const { setMapPosition } = useMapPosition();
+  const { mapPosition, setMapPosition } = useMapPosition();
   const [lat, lng] = branch.position.split(',');
+
+  const isActive =
+    mapPosition[0] === Number(lat) && mapPosition[1] === Number(lng);
 
   return (
     <li
-      className="flex cursor-pointer items-center gap-4 rounded-lg border-l-[5px] border-[#00c46a] bg-[#42484d] px-3 py-4 text-[#ececec] no-underline"
+      className={`flex cursor-pointer items-center gap-4 rounded-lg border-l-[5px] border-[#00c46a] bg-[#42484d] px-3 py-4 text-[#ececec] no-underline ${
+        isActive ? 'border-2 border-l-[5px] border-[#00c46a]' : ''
+      }`}
       onClick={() => setMapPosition([Number(lat), Number(lng)])}
     >
       <span className="text-base leading-none">{branch.emoji}</span>

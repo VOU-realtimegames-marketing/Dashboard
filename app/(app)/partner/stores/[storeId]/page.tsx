@@ -19,7 +19,7 @@ export default async function StorePage({
   return (
     <div className="relative flex h-full overscroll-y-none p-4">
       <MapPositionProvider>
-        <Map />
+        <Map branchs={branchs} />
         <Sidebar branchs={branchs} />
       </MapPositionProvider>
     </div>

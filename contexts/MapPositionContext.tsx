@@ -10,29 +10,38 @@ import {
   useState
 } from 'react';
 
+type MapPositionContextType = {
+  mapPosition: MapPosition;
+  setMapPosition: Dispatch<SetStateAction<MapPosition>>;
+  resetPosition: () => void;
+  isClickMap: Boolean;
+  setIsClickMap: Dispatch<SetStateAction<Boolean>>;
+};
+
 const MapPositionContext = createContext<MapPositionContextType>(null!);
 
-const initialState: MapPosition = [10, 106];
+const initialPosition: MapPosition = [10, 106];
 
 function MapPositionProvider({ children }: { children: ReactNode }) {
-  const [mapPosition, setMapPosition] = useState<MapPosition>(initialState);
+  const [mapPosition, setMapPosition] = useState<MapPosition>(initialPosition);
+  const [isClickMap, setIsClickMap] = useState<Boolean>(false);
 
-  const resetPosition = () => setMapPosition(initialState);
+  const resetPosition = () => setMapPosition(initialPosition);
 
   return (
     <MapPositionContext.Provider
-      value={{ mapPosition, setMapPosition, resetPosition }}
+      value={{
+        mapPosition,
+        setMapPosition,
+        resetPosition,
+        isClickMap,
+        setIsClickMap
+      }}
     >
       {children}
     </MapPositionContext.Provider>
   );
 }
-
-type MapPositionContextType = {
-  mapPosition: MapPosition;
-  setMapPosition: Dispatch<SetStateAction<MapPosition>>;
-  resetPosition: () => void;
-};
 
 function useMapPosition() {
   const context = useContext<MapPositionContextType>(MapPositionContext);

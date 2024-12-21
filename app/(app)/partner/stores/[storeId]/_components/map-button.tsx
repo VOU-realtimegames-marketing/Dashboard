@@ -1,9 +1,11 @@
 function Button({
   children,
-  onClick
+  onClick,
+  type
 }: {
   children: React.ReactNode;
   onClick: () => void;
+  type?: 'primary' | 'back' | 'position';
 }) {
   return (
     <button

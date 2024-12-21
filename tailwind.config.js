@@ -84,11 +84,15 @@ module.exports = {
           to: {
             height: '0'
           }
+        },
+        rotate: {
+          to: { transform: 'rotate(1turn)' }
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out'
+        'accordion-up': 'accordion-up 0.2s ease-out',
+        'spin-custom': 'rotate 1.5s infinite linear'
       }
     }
   },
