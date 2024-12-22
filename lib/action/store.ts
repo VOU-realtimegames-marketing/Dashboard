@@ -103,3 +103,31 @@ export async function createBranchAction(data: CreateBranchData) {
 
   revalidatePath(`/partner/stores/${data.store_id}`);
 }
+
+export async function deleteBranchAction({
+  id,
+  store_id
+}: {
+  id: number;
+  store_id: number;
+}) {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('accessToken')?.value;
+  const refreshToken = cookieStore.get('refreshToken')?.value;
+
+  const response = await fetch(
+    `${process.env.API_GATEWAY_URL}/api/v1/branches/${id}`,
+    {
+      method: 'DELETE',
+      headers: {
+        cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`
+      }
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to delete this branch');
+  }
+
+  revalidatePath(`/partner/stores/${store_id}`);
+}
