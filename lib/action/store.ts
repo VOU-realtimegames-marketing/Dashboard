@@ -6,6 +6,7 @@ import {
   StoreValue
 } from '@/app/(app)/partner/stores/_data/schema';
 import { revalidatePath } from 'next/cache';
+import { CreateBranchData } from '@/app/(app)/partner/stores/[storeId]/_data/schema';
 
 export async function createStoreAction(data: CreateEditStoreValue) {
   const cookieStore = cookies();
@@ -77,4 +78,28 @@ export async function deleteStoreAction(data: StoreValue) {
   }
 
   revalidatePath('/partner/stores');
+}
+
+export async function createBranchAction(data: CreateBranchData) {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('accessToken')?.value;
+  const refreshToken = cookieStore.get('refreshToken')?.value;
+
+  const response = await fetch(
+    `${process.env.API_GATEWAY_URL}/api/v1/create_branch`,
+    {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+        cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`
+      }
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to create branch');
+  }
+
+  revalidatePath(`/partner/stores/${data.store_id}`);
 }

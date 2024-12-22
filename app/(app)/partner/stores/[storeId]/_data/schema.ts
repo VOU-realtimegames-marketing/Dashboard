@@ -15,3 +15,13 @@ export type Branch = {
   address: string;
   emoji: string;
 };
+
+export type CreateBranchData = {
+  store_id: number;
+  name: string;
+  position: string;
+  city_name: string;
+  country: string;
+  address: string;
+  emoji: string;
+};

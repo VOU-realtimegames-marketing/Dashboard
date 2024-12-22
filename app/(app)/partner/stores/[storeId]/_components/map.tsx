@@ -39,7 +39,7 @@ function Map({ branchs }: { branchs: Branch[] }) {
   return (
     <div className="relative h-full flex-1 bg-[var(--color-gray-100)]">
       {!geolocationPosition && (
-        <Button onClick={getPosition}>
+        <Button variant="position" onClick={getPosition}>
           {isLoadingPosition ? 'Loading...' : 'Use your position'}
         </Button>
       )}

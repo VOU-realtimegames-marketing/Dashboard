@@ -1,12 +1,11 @@
-// "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0"
-
 import { useMapPosition } from '@/contexts/MapPositionContext';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import Spinner from './spinner';
 import Button from './map-button';
-
-// import Button from './Button';
-// import BackButton from './BackButton';
+import Label from './label';
+import Input from './input';
+import { createBranchAction } from '@/lib/action/store';
+import { toast } from 'sonner';
 
 export function convertToEmoji(countryCode: string) {
   const codePoints = countryCode
@@ -18,20 +17,21 @@ export function convertToEmoji(countryCode: string) {
 
 const BASE_URL = 'https://api.bigdatacloud.net/data/reverse-geocode-client';
 
-function Form() {
+function Form({ storeId }: { storeId: string }) {
   const {
-    mapPosition: [lat, lng]
+    mapPosition: [lat, lng],
+    setIsClickMap
   } = useMapPosition();
 
   const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
   const [cityName, setCityName] = useState('');
   const [branchName, setBranchName] = useState('');
+  const [address, setAddress] = useState('');
   const [country, setCountry] = useState('');
-  const [date, setDate] = useState(new Date());
-  const [notes, setNotes] = useState('');
 
   const [emoji, setEmoji] = useState('');
   const [geocodingError, setGeocodingError] = useState('');
+  const [isFormLoading, startTransition] = useTransition();
 
   useEffect(
     function () {
@@ -46,7 +46,6 @@ function Form() {
             `${BASE_URL}?latitude=${lat}&longitude=${lng}`
           );
           const data = await res.json();
-          console.log(data);
 
           if (!data.countryCode)
             throw new Error(
@@ -72,68 +71,102 @@ function Form() {
     [lat, lng]
   );
 
-  async function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    if (!cityName) return;
+    if (!cityName || !branchName || !address) return;
 
-    // const newCity = {
-    //   cityName,
-    //   country,
-    //   emoji,
-    //   date,
-    //   notes,
-    //   position: { lat, lng }
-    // };
+    const newBrach = {
+      store_id: Number(storeId),
+      name: branchName,
+      address,
+      city_name: cityName,
+      country,
+      emoji,
+      position: `${lat},${lng}`
+    };
 
-    // await createCity(newCity);
+    startTransition(async () => {
+      try {
+        await createBranchAction(newBrach);
+        toast.success('New Branch Created Successfully!');
+      } catch (err) {
+        if (err instanceof Error) {
+          toast.error(err.message);
+        } else {
+          toast.error('An unexpected error occurred');
+        }
+      }
+
+      setIsClickMap(false);
+    });
   }
 
   if (isLoadingGeocoding) return <Spinner />;
 
   if (!lat && !lng)
     return (
-      <p className="mx-auto my-5 w-4/5 text-center text-[18px] font-semibold">
+      <p className="mx-auto my-5 w-4/5 text-center text-[18px] font-semibold text-[#ececec]">
         <span role="img">👋</span> Start by clicking somewhere on the map
       </p>
     );
 
   if (geocodingError)
     return (
-      <p className="mx-auto my-5 w-4/5 text-center text-[18px] font-semibold">
+      <p className="mx-auto my-5 w-4/5 text-center text-[18px] font-semibold text-[#ececec]">
         <span role="img">👋</span> {geocodingError}
       </p>
     );
 
   return (
     <form
-      className="flex w-full flex-col gap-8 rounded-lg bg-[#42484d] px-7 py-5"
+      className={`flex w-full flex-col gap-8 rounded-lg bg-[#42484d] px-7 py-5 ${
+        isFormLoading ? 'opacity-30' : ''
+      }`}
       onSubmit={handleSubmit}
     >
       <div className="relative flex flex-col gap-1">
-        <label htmlFor="cityName">City name</label>
-        <input
-          id="cityName"
-          onChange={(e) => setCityName(e.target.value)}
-          value={cityName}
-        />
-        <span className="absolute right-3 top-7 text-[28px]">{emoji}</span>
+        <Label htmlFor="cityName">City name</Label>
+        <Input id="cityName" readOnly={true} value={cityName} />
+        <span className="absolute right-2 top-6 text-[28px]">{emoji}</span>
       </div>
 
       <div className="relative flex flex-col gap-1">
-        <label htmlFor="name">Branch name</label>
-        <input
+        <Label htmlFor="name">Branch name</Label>
+        <Input
           id="name"
-          onChange={(e) => setBranchName(e.target.value)}
           value={branchName}
+          onChange={(e) => setBranchName(e.target.value)}
+          required={true}
+        />
+      </div>
+
+      <div className="relative flex flex-col gap-1">
+        <Label htmlFor="address">Branch address</Label>
+        <Input
+          id="address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          required={true}
         />
       </div>
 
       <div className="flex justify-between">
-        <Button type="primary" onClick={() => {}}>
+        <Button
+          variant="primary"
+          onClick={() => {}}
+          type="submit"
+          isLoading={isFormLoading}
+        >
           Add
         </Button>
-        {/* <BackButton /> */}
+        <Button
+          variant="back"
+          onClick={() => setIsClickMap(false)}
+          isLoading={isFormLoading}
+        >
+          &larr; Back
+        </Button>
       </div>
     </form>
   );
