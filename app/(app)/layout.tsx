@@ -21,10 +21,6 @@ export default async function DashboardLayout({
   const defaultOpen = cookieStore.get('sidebar:state')?.value === 'true';
   const session = await auth();
 
-  if (!session?.user) {
-    return redirect('/login');
-  }
-
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
       <AppSidebar session={session} />
