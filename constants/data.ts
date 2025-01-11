@@ -280,6 +280,14 @@ export const partnerNavItems: NavItem[] = [
     items: [] // No child items
   },
   {
+    title: 'Events',
+    url: '/partner/events',
+    icon: 'event',
+    shortcut: ['p', 'e'],
+    isActive: false,
+    items: [] // No child items
+  },
+  {
     title: 'Product',
     url: '/partner/product',
     icon: 'product',

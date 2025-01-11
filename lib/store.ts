@@ -2,7 +2,7 @@ import { Branch } from '@/app/(app)/partner/stores/[storeId]/_data/schema';
 import { StoreValue } from '@/app/(app)/partner/stores/_data/schema';
 import { cookies } from 'next/headers';
 
-type Stores = {
+export type Stores = {
   stores: StoreValue[];
 };
 
