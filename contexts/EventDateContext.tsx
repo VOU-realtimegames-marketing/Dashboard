@@ -1,5 +1,6 @@
 'use client';
 
+import { addDays } from 'date-fns';
 import {
   createContext,
   Dispatch,
@@ -8,24 +9,25 @@ import {
   useContext,
   useState
 } from 'react';
+import { DateRange } from 'react-day-picker';
 
-type EventDateRange = {
-  from: Date | undefined;
-  to: Date | undefined;
+type EventDateContextType =
+  | {
+      range: DateRange | undefined;
+      setRange: Dispatch<SetStateAction<DateRange | undefined>>;
+      resetRange: () => void;
+    }
+  | undefined;
+
+const EventDateContext = createContext<EventDateContextType>(undefined);
+
+const initialState = {
+  from: undefined,
+  to: undefined
 };
-
-type EventDateContextType = {
-  range: EventDateRange;
-  setRange: Dispatch<SetStateAction<EventDateRange>>;
-  resetRange: () => void;
-};
-
-const EventDateContext = createContext<EventDateContextType>(null!);
-
-const initialState = { from: undefined, to: undefined };
 
 function EventDateProvider({ children }: { children: ReactNode }) {
-  const [range, setRange] = useState<EventDateRange>(initialState);
+  const [range, setRange] = useState<DateRange | undefined>(initialState);
 
   const resetRange = () => setRange(initialState);
 

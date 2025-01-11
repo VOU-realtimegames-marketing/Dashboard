@@ -10,7 +10,7 @@ export async function createEventAction(data: CreateEventValue) {
   const refreshToken = cookieStore.get('refreshToken')?.value;
 
   const response = await fetch(
-    `${process.env.API_GATEWAY_URL}/api/v1/create_store`,
+    `${process.env.API_GATEWAY_URL}/api/v1/create_event`,
     {
       method: 'POST',
       body: JSON.stringify(data),
@@ -25,5 +25,5 @@ export async function createEventAction(data: CreateEventValue) {
     throw new Error('Failed to create event');
   }
 
-  revalidatePath('/partner/stores');
+  revalidatePath('/partner/events');
 }

@@ -20,6 +20,15 @@ export const createEventSchema = z.object({
   voucher_quantity: z.number(),
   start_time: z.date(),
   end_time: z.date(),
+  date_range: z.object(
+    {
+      from: z.date(),
+      to: z.date()
+    },
+    {
+      required_error: 'Please select a date range'
+    }
+  ),
   quiz_genre: z.string().optional(), // optional
   quiz_number: z.number().optional() // optional
 });

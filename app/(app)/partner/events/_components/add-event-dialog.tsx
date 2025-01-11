@@ -28,6 +28,10 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
+import { useEventDate } from '@/contexts/EventDateContext';
+import { CalendarDateRangePicker } from '@/components/date-range-picker';
+import quiz_genres from '../_data/quiz_genre';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 export default function AddEventDialog({ stores }: { stores: StoreValue[] }) {
   const [open, setOpen] = useState(false);
@@ -38,17 +42,20 @@ export default function AddEventDialog({ stores }: { stores: StoreValue[] }) {
     register,
     formState: { errors, isSubmitting },
     reset,
-    watch
+    watch,
+    setValue
   } = useForm<CreateEventValue>({
     resolver: zodResolver(createEventSchema)
   });
+  const { range, setRange } = useEventDate();
 
   const gameId = watch('game_id');
 
   const onSubmit = async (data: CreateEventValue) => {
     try {
+      console.log(data);
       await createEventAction(data);
-      toast.success('Store added successfully!');
+      toast.success('Event added successfully!');
     } catch (err) {
       if (err instanceof Error) {
         toast.error(err.message);
@@ -116,20 +123,26 @@ export default function AddEventDialog({ stores }: { stores: StoreValue[] }) {
           <div className="mb-6 flex flex-col justify-between gap-2">
             <div className="flex items-center justify-between gap-5">
               <Label htmlFor="store_id">Store</Label>
-              <Select {...register('store_id')}>
-                <SelectTrigger className="w-[250px]">
-                  <SelectValue placeholder="Select a store" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {stores.map((store) => (
-                      <SelectItem value={store.id} key={store.id}>
-                        {store.name}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+              <Controller
+                name="store_id"
+                control={control}
+                render={({ field }) => (
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <SelectTrigger className="w-[250px]">
+                      <SelectValue placeholder="Select a store" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        {stores.map((store) => (
+                          <SelectItem value={store.id} key={store.id}>
+                            {store.name}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                )}
+              />
             </div>
             {errors.store_id && (
               <p className="my-1 self-end text-destructive">{`${errors.store_id.message}`}</p>
@@ -178,10 +191,13 @@ export default function AddEventDialog({ stores }: { stores: StoreValue[] }) {
                         <SelectTrigger className="w-[250px]">
                           <SelectValue placeholder="Select quiz genre" />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent className="max-h-[200px] overflow-y-auto">
                           <SelectGroup>
-                            <SelectItem value="1">Quiz game</SelectItem>
-                            <SelectItem value="2">Phone shake game</SelectItem>
+                            {quiz_genres.map((genre) => (
+                              <SelectItem value={genre} key={genre}>
+                                {genre}
+                              </SelectItem>
+                            ))}
                           </SelectGroup>
                         </SelectContent>
                       </Select>
@@ -211,10 +227,27 @@ export default function AddEventDialog({ stores }: { stores: StoreValue[] }) {
             </>
           )}
 
-          <div className="mb-6 flex flex-col gap-1">
-            <Label htmlFor="name" className="mb-2">
-              Event schedule
-            </Label>
+          <div className="mb-6 flex items-center justify-between gap-5">
+            <Label htmlFor="">Event schedule</Label>
+            <Controller
+              name="date_range"
+              control={control}
+              render={({ field }) => (
+                <CalendarDateRangePicker
+                  className="w-[250px]"
+                  range={field.value}
+                  setRange={(range) => {
+                    field.onChange(range);
+                    if (range?.from) {
+                      setValue('start_time', range.from);
+                    }
+                    if (range?.to) {
+                      setValue('end_time', range.to);
+                    }
+                  }}
+                />
+              )}
+            />
           </div>
         </form>
 

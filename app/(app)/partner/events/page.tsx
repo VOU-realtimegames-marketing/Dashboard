@@ -8,6 +8,7 @@ import AddEventDialog from './_components/add-event-dialog';
 import { getEventsOfOwner } from '@/lib/event';
 import { getStoresOfOwner } from '@/lib/store';
 import { auth } from '@/lib/auth';
+import { EventDateProvider } from '@/contexts/EventDateContext';
 
 export const metadata = {
   title: 'VOU | Events'
@@ -25,8 +26,9 @@ export default async function EventsPage() {
       <div className="space-y-4">
         <div className="flex items-start justify-between">
           <Heading title={`Events`} description="Manage events" />
-
-          <AddEventDialog stores={stores} />
+          <EventDateProvider>
+            <AddEventDialog stores={stores} />
+          </EventDateProvider>
         </div>
         <Separator />
         <DataTable columns={columns} data={events} />
