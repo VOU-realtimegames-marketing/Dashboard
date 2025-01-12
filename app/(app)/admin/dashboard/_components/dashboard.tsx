@@ -23,7 +23,7 @@ export default function Dashboard() {
             Hi, Welcome back 👋
           </h2>
           <div className="hidden items-center space-x-2 md:flex">
-            <CalendarDateRangePicker />
+            {/* <CalendarDateRangePicker /> */}
             <Button>Download</Button>
           </div>
         </div>

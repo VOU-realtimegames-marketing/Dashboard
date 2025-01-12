@@ -34,7 +34,8 @@ import {
   UserPen,
   UserX2Icon,
   X,
-  AlignCenterVerticalIcon
+  AlignCenterVerticalIcon,
+  Gamepad
 } from 'lucide-react';
 
 export type Icon = LucideIcon;
@@ -42,6 +43,7 @@ export type Icon = LucideIcon;
 export const Icons = {
   dashboard: LayoutDashboardIcon,
   logo: Command,
+  event: Gamepad,
   login: LogIn,
   close: X,
   product: LucideShoppingBag,
