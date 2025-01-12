@@ -27,3 +27,28 @@ export async function createEventAction(data: CreateEventValue) {
 
   revalidatePath('/partner/events');
 }
+
+export async function updateEventStatusAction(eventId: number) {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('accessToken')?.value;
+  const refreshToken = cookieStore.get('refreshToken')?.value;
+
+  const response = await fetch(
+    `${process.env.API_GATEWAY_URL}/api/v1/events/${eventId}/status`,
+    {
+      method: 'PATCH',
+      body: JSON.stringify({ status: 'ready' }),
+      headers: {
+        'Content-Type': 'application/json',
+        cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`
+      }
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to update event');
+  }
+
+  revalidatePath('/admin/events');
+  revalidatePath('/partner/events');
+}

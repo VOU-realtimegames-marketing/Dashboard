@@ -6,6 +6,19 @@ type Events = {
   events: EventValue[];
 };
 
+export async function getAllEvents(): Promise<Events> {
+  const response = await fetch(`${process.env.API_GATEWAY_URL}/api/v1/events`, {
+    next: { revalidate: 60 }
+  });
+
+  if (!response.ok) {
+    return { events: [] };
+  }
+
+  const events = await response.json();
+  return events;
+}
+
 export async function getEventsOfOwner(owner: string): Promise<Events> {
   const response = await fetch(
     `${process.env.API_GATEWAY_URL}/api/v1/events/owner/${owner}`,

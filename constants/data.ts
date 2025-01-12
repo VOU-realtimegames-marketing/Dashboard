@@ -216,6 +216,22 @@ export const adminNavItems: NavItem[] = [
     items: [] // No child items
   },
   {
+    title: 'Stores',
+    url: '/admin/stores',
+    icon: 'store',
+    shortcut: ['a', 's'],
+    isActive: false,
+    items: [] // No child items
+  },
+  {
+    title: 'Events',
+    url: '/admin/events',
+    icon: 'event',
+    shortcut: ['a', 'e'],
+    isActive: false,
+    items: [] // No child items
+  },
+  {
     title: 'Product',
     url: '/admin/product',
     icon: 'product',

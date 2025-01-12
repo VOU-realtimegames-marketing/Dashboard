@@ -26,9 +26,7 @@ export default async function EventsPage() {
       <div className="space-y-4">
         <div className="flex items-start justify-between">
           <Heading title={`Events`} description="Manage events" />
-          <EventDateProvider>
-            <AddEventDialog stores={stores} />
-          </EventDateProvider>
+          <AddEventDialog stores={stores} />
         </div>
         <Separator />
         <DataTable columns={columns} data={events} />
