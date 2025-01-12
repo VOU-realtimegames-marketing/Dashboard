@@ -10,7 +10,7 @@ export default async function Layout({
 
   const { role } = session.user;
 
-  if (role !== 'admin') {
+  if (role !== 'partner') {
     return redirect('/login');
   }
 

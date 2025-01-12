@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: 'Website for counterparties to manage their games and campaigns.'
 };
 
-export default async function DashboardLayout({
+export default async function AppLayout({
   children
 }: {
   children: React.ReactNode;

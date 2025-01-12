@@ -8,9 +8,9 @@ type Events = {
 
 export async function getEventsOfOwner(owner: string): Promise<Events> {
   const response = await fetch(
-    `${process.env.API_GATEWAY_URL}/api/v1/events?owner=${owner}`,
+    `${process.env.API_GATEWAY_URL}/api/v1/events/owner/${owner}`,
     {
-      next: { revalidate: 3600 }
+      next: { revalidate: 60 }
     }
   );
 

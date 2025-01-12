@@ -1,6 +1,7 @@
 import { getEventById } from '@/lib/event';
 import { QUIZ_GAME_ID } from '../_data/schema';
 import QuizPage from './_components/quiz-page';
+import PhoneShakePage from './_components/phone-shake-page';
 
 export default async function EventPage({
   params: { eventId }
@@ -13,8 +14,8 @@ export default async function EventPage({
   }
 
   if (event.game_id === QUIZ_GAME_ID) {
-    return <QuizPage eventId={eventId} />;
+    return <QuizPage event={event} />;
   }
 
-  return <div className="container mx-auto py-6">shake game</div>;
+  return <PhoneShakePage event={event} />;
 }
