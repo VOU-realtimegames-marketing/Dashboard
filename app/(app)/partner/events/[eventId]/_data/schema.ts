@@ -1,27 +1,24 @@
-export type Position = {
-  lat: number;
-  lng: number;
-};
+import { z } from 'zod';
 
-export type MapPosition = [number, number];
+export const quizSchema = z.object({
+  id: z.number(),
+  event_id: z.number(),
+  quiz_genre: z.string(),
+  content: z.array(
+    z.object({
+      question: z.string(),
+      options: z.array(z.string()),
+      answer: z.string()
+    })
+  ),
+  created_at: z.string().datetime()
+});
 
-export type Branch = {
-  id: number;
-  store_id: number;
-  name: string;
-  position: string;
-  city_name: string;
-  country: string;
-  address: string;
-  emoji: string;
-};
+export const quizContentSchema = z.object({
+  options: z.array(z.string()),
+  question: z.string(),
+  answer: z.string()
+});
 
-export type CreateBranchData = {
-  store_id: number;
-  name: string;
-  position: string;
-  city_name: string;
-  country: string;
-  address: string;
-  emoji: string;
-};
+export type QuizValue = z.infer<typeof quizSchema>;
+export type QuizContentValue = z.infer<typeof quizContentSchema>;

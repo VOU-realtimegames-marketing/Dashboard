@@ -1,10 +1,13 @@
 import { z } from 'zod';
 
+export const QUIZ_GAME_ID = '1';
+export const SHAKE_GAME_ID = '2';
+
 export const eventSchema = z.object({
   id: z.string(),
   name: z.string(),
   store: z.string(),
-  game_type: z.string(),
+  game_id: z.string(),
   voucher_quantity: z.number().min(1),
   status: z.string(),
   start_time: z.string(),

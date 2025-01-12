@@ -73,7 +73,7 @@ export const columns: ColumnDef<EventValue>[] = [
     }
   },
   {
-    accessorKey: 'game_type',
+    accessorKey: 'game_id',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Game type" />
     ),
@@ -81,7 +81,7 @@ export const columns: ColumnDef<EventValue>[] = [
       return (
         <div className="flex space-x-2">
           <span className="max-w-[500px] truncate font-medium">
-            {row.getValue('game_type')}
+            {row.getValue('game_id') === '1' ? 'Quiz game' : 'Phone shake game'}
           </span>
         </div>
       );

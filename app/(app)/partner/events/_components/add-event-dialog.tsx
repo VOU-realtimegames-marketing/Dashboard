@@ -16,7 +16,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useState } from 'react';
 import { Loader2, Plus } from 'lucide-react';
-import { createEventSchema, CreateEventValue } from '../_data/schema';
+import {
+  createEventSchema,
+  CreateEventValue,
+  QUIZ_GAME_ID
+} from '../_data/schema';
 import { toast } from 'sonner';
 import { createEventAction } from '@/lib/action/event';
 import { StoreValue } from '../../stores/_data/schema';
@@ -28,10 +32,8 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
-import { useEventDate } from '@/contexts/EventDateContext';
 import { CalendarDateRangePicker } from '@/components/date-range-picker';
 import quiz_genres from '../_data/quiz_genre';
-import { ScrollArea } from '@/components/ui/scroll-area';
 
 export default function AddEventDialog({ stores }: { stores: StoreValue[] }) {
   const [open, setOpen] = useState(false);
@@ -47,13 +49,12 @@ export default function AddEventDialog({ stores }: { stores: StoreValue[] }) {
   } = useForm<CreateEventValue>({
     resolver: zodResolver(createEventSchema)
   });
-  const { range, setRange } = useEventDate();
 
   const gameId = watch('game_id');
 
   const onSubmit = async (data: CreateEventValue) => {
     try {
-      console.log(data);
+      // console.log(data);
       await createEventAction(data);
       toast.success('Event added successfully!');
     } catch (err) {
@@ -175,7 +176,7 @@ export default function AddEventDialog({ stores }: { stores: StoreValue[] }) {
             )}
           </div>
 
-          {gameId === '1' && (
+          {gameId === QUIZ_GAME_ID && (
             <>
               <div className="mb-6 flex flex-col justify-between gap-2">
                 <div className="flex items-center justify-between gap-5">

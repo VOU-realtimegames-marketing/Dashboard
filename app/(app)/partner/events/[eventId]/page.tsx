@@ -1,27 +1,20 @@
-import { MapPositionProvider } from '@/contexts/MapPositionContext';
-import dynamic from 'next/dynamic';
-import Sidebar from './_components/sidebar';
-import { getBranchs } from '@/lib/store';
-import { Spinner } from '@/components/ui/spinner';
+import { getEventById } from '@/lib/event';
+import { QUIZ_GAME_ID } from '../_data/schema';
+import QuizPage from './_components/quiz-page';
 
-const Map = dynamic(() => import('./_components/map'), {
-  loading: () => <Spinner />,
-  ssr: false
-});
-
-export default async function StorePage({
-  params: { storeId }
+export default async function EventPage({
+  params: { eventId }
 }: {
-  params: { storeId: string };
+  params: { eventId: string };
 }) {
-  const { branchs = [] } = await getBranchs(storeId);
+  const { event } = await getEventById(Number(eventId));
+  if (!event) {
+    return <div>Event not found</div>;
+  }
 
-  return (
-    <div className="relative flex h-full overscroll-y-none p-4">
-      <MapPositionProvider>
-        <Map branchs={branchs} />
-        <Sidebar branchs={branchs} storeId={storeId} />
-      </MapPositionProvider>
-    </div>
-  );
+  if (event.game_id === QUIZ_GAME_ID) {
+    return <QuizPage eventId={eventId} />;
+  }
+
+  return <div className="container mx-auto py-6">shake game</div>;
 }
