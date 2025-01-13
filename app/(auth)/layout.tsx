@@ -14,16 +14,6 @@ export default async function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth();
-  if (session?.user) {
-    const { role } = session.user;
-    if (role === 'admin') {
-      redirect('/admin/dashboard');
-    } else if (role === 'partner') {
-      redirect('/partner/dashboard');
-    }
-  }
-
   return (
     <div className="container relative flex h-screen max-w-none flex-col items-center justify-center md:grid md:grid-cols-2 md:px-0">
       <div className="relative col-span-1 h-full bg-muted p-10 text-white max-[768px]:hidden dark:border-r">

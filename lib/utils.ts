@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { Active, DataRef, Over } from '@dnd-kit/core';
+import { format, subMonths } from 'date-fns';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -22,4 +23,30 @@ export function formatBytes(
   return `${(bytes / Math.pow(1024, i)).toFixed(decimals)} ${
     sizeType === 'accurate' ? accurateSizes[i] ?? 'Bytest' : sizes[i] ?? 'Bytes'
   }`;
+}
+
+export const formatNumber = (value = 0, precision = 3) =>
+  new Intl.NumberFormat('en-US', {
+    style: 'decimal',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: precision
+  }).format(value);
+
+export const randomColor = () => {
+  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+};
+
+export function getRangeTime() {
+  const today = new Date();
+
+  // Tính ngày của 6 tháng trước
+  const last6MonthsDate = subMonths(today, 6);
+
+  // Format tháng và năm bằng date-fns
+  const last6Month = format(last6MonthsDate, 'MMMM'); // Tên tháng (vd: "July")
+  const yearOfLast6Month = format(last6MonthsDate, 'yyyy'); // Năm của 6 tháng trước
+  const currentMonth = format(today, 'MMMM'); // Tháng hiện tại
+  const yearOfCurrentMonth = format(today, 'yyyy'); // Năm hiện tại
+
+  return `${last6Month} ${yearOfLast6Month} - ${currentMonth} ${yearOfCurrentMonth}`;
 }

@@ -9,6 +9,8 @@ export async function createEventAction(data: CreateEventValue) {
   const accessToken = cookieStore.get('accessToken')?.value;
   const refreshToken = cookieStore.get('refreshToken')?.value;
 
+  console.log('__createEventAction: ', data);
+
   const response = await fetch(
     `${process.env.API_GATEWAY_URL}/api/v1/create_event`,
     {
