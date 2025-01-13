@@ -18,6 +18,8 @@ import {
   ChartTooltip,
   ChartTooltipContent
 } from '@/components/ui/chart';
+import { randomColor } from '@/lib/utils';
+
 const chartData = [
   { browser: 'chrome', visitors: 275, fill: 'var(--color-chrome)' },
   { browser: 'safari', visitors: 200, fill: 'var(--color-safari)' },
@@ -52,16 +54,22 @@ const chartConfig = {
   }
 } satisfies ChartConfig;
 
-export function PieGraph() {
+type GraphProps = {
+  chartData: any[]; // Kiểu mảng bất kỳ
+};
+
+export function PieGraph({ chartData = [] }: GraphProps) {
+  chartData.forEach((item) => (item.fill = randomColor()));
+
   const totalVisitors = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
-  }, []);
+    return chartData.reduce((acc, curr) => acc + curr.total_user_play, 0);
+  }, [chartData]);
 
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Pie Chart - Donut with Text</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>User Play by Store</CardTitle>
+        <CardDescription>July 2024 - January 2025</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
@@ -75,9 +83,10 @@ export function PieGraph() {
             />
             <Pie
               data={chartData}
-              dataKey="visitors"
-              nameKey="browser"
+              dataKey="total_user_play"
+              nameKey="store_name"
               innerRadius={60}
+              outerRadius={100}
               strokeWidth={5}
             >
               <Label
@@ -102,7 +111,7 @@ export function PieGraph() {
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Visitors
+                          Total plays
                         </tspan>
                       </text>
                     );
@@ -114,11 +123,8 @@ export function PieGraph() {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
         <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
+          Total users play by store in the last 6 months
         </div>
       </CardFooter>
     </Card>

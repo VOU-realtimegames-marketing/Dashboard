@@ -23,7 +23,6 @@ import {
 } from '../_data/schema';
 import { toast } from 'sonner';
 import { createEventAction } from '@/lib/action/event';
-import { StoreValue } from '../../stores/_data/schema';
 import {
   Select,
   SelectContent,
@@ -34,6 +33,7 @@ import {
 } from '@/components/ui/select';
 import { CalendarDateRangePicker } from '@/components/date-range-picker';
 import quiz_genres from '../_data/quiz_genre';
+import { StoreValue } from '@/app/(app)/partner/stores/_data/schema';
 
 export default function AddEventDialog({ stores }: { stores: StoreValue[] }) {
   const [open, setOpen] = useState(false);

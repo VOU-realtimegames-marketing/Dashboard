@@ -24,6 +24,7 @@ export async function getStoresOfOwner(): Promise<Stores> {
   }
 
   const stores = await response.json();
+
   // console.log(stores);
   return stores;
 }
