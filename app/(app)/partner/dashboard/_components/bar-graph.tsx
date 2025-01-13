@@ -38,7 +38,7 @@ type BarGraphProps = {
   chartData: any[]; // Kiểu mảng bất kỳ
 };
 
-export function BarGraph({ chartData }: BarGraphProps) {
+export function BarGraph({ chartData = [] }: BarGraphProps) {
   const [activeChart, setActiveChart] =
     React.useState<keyof typeof chartConfig>('quizGame');
 

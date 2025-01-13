@@ -12,6 +12,7 @@ const genFakeData = () => {
   const startDate = new Date();
   startDate.setMonth(today.getMonth() - 2); // Lấy ngày từ 2 tháng trước
 
+  // List số lượng user chơi game, group theo ngày, mỗi ngày sẽ có 2 số liệu là số lượt chơi quizGame và shakeGame
   const chartUserPlay = [];
   let currentDate = startDate;
 
@@ -97,7 +98,7 @@ const genFakeData = () => {
     }
   ];
 
-  // list user chơi theo cửa hàng trong 6 tháng gần nhất
+  // list user chơi game, group theo store, filter time trong 6 tháng gần nhất
   const chartUserStore = [
     { id: 1, name: 'Cửa hàng 1', total_user_play: randomInteger(100, 1000) },
     { id: 2, name: 'Cửa hàng 2', total_user_play: randomInteger(100, 1000) },
@@ -120,12 +121,12 @@ const genFakeData = () => {
 
 export async function getOverview(): Promise<any> {
   const fakeData = genFakeData();
-  return fakeData;
-
-  return fakeData;
+  // return fakeData;
   const cookieStore = cookies();
   const accessToken = cookieStore.get('accessToken')?.value;
   const refreshToken = cookieStore.get('refreshToken')?.value;
+
+  console.log('___accessToken:', accessToken);
 
   const response = await fetch(
     `${process.env.API_GATEWAY_URL}/api/v1/cms/overview`,
@@ -139,7 +140,7 @@ export async function getOverview(): Promise<any> {
   );
 
   if (!response.ok) {
-    return { stores: [] };
+    return fakeData;
   }
 
   const rs = await response.json();

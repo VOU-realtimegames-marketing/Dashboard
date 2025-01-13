@@ -17,7 +17,7 @@ import {
   ChartTooltip,
   ChartTooltipContent
 } from '@/components/ui/chart';
-import { formatNumber } from '@/lib/utils';
+import { formatNumber, getRangeTime } from '@/lib/utils';
 
 // const chartData = [
 //   { month: 'January', quizGame: 186, shakeGame: 80 },
@@ -43,21 +43,19 @@ type GraphProps = {
   chartData: any[]; // Kiểu mảng bất kỳ
 };
 
-export function AreaGraph({ chartData }: GraphProps) {
+export function AreaGraph({ chartData = [] }: GraphProps) {
   const totalVoucherThisMonth =
-    chartData[chartData.length - 1].quizGame +
-    chartData[chartData.length - 1].shakeGame;
+    chartData[chartData.length - 1]?.quizGame +
+      chartData[chartData.length - 1]?.shakeGame || 0;
 
   const totalVoucherLastMonth =
-    chartData[chartData.length - 2].quizGame +
-    chartData[chartData.length - 2].shakeGame;
+    chartData[chartData.length - 2]?.quizGame +
+      chartData[chartData.length - 2]?.shakeGame || 0;
 
   const percentTrending =
     (totalVoucherThisMonth / totalVoucherLastMonth - 1) * 100;
-  const currentYear = new Date().getFullYear();
-  const timeRange = `${chartData[0].month} - ${
-    chartData[chartData.length - 1].month
-  } ${currentYear}`;
+
+  const timeRange = getRangeTime();
   return (
     <Card>
       <CardHeader>
