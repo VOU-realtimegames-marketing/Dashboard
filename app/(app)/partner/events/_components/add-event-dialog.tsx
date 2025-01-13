@@ -32,8 +32,8 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
-import { CalendarDateRangePicker } from '@/components/date-range-picker';
 import quiz_genres from '../_data/quiz_genre';
+import { DateTimePicker } from '@/components/ui/date-time-picker';
 
 export default function AddEventDialog({ stores }: { stores: StoreValue[] }) {
   const [open, setOpen] = useState(false);
@@ -68,7 +68,7 @@ export default function AddEventDialog({ stores }: { stores: StoreValue[] }) {
     setOpen(false);
   };
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={setOpen} data-focus-trap="false">
       <DialogTrigger asChild>
         <Button>
           <Plus className="mr-2 h-4 w-4" />
@@ -84,7 +84,7 @@ export default function AddEventDialog({ stores }: { stores: StoreValue[] }) {
         </DialogHeader>
 
         <form
-          id="add-store-form"
+          id="add-event-form"
           className="mt-4"
           onSubmit={(e) => {
             handleSubmit(onSubmit)(e);
@@ -228,27 +228,52 @@ export default function AddEventDialog({ stores }: { stores: StoreValue[] }) {
             </>
           )}
 
-          <div className="mb-6 flex items-center justify-between gap-5">
-            <Label htmlFor="">Event schedule</Label>
-            <Controller
-              name="date_range"
-              control={control}
-              render={({ field }) => (
-                <CalendarDateRangePicker
-                  className="w-[250px]"
-                  range={field.value}
-                  setRange={(range) => {
-                    field.onChange(range);
-                    if (range?.from) {
-                      setValue('start_time', range.from);
-                    }
-                    if (range?.to) {
-                      setValue('end_time', range.to);
-                    }
-                  }}
-                />
-              )}
-            />
+          <div className="mb-6 flex flex-col justify-between gap-2">
+            <div className="flex items-center justify-between gap-5">
+              <Label htmlFor="start_time">Start time</Label>
+              <Controller
+                name="start_time"
+                control={control}
+                render={({ field }) => (
+                  <DateTimePicker
+                    date={field.value}
+                    setDate={(date) => {
+                      field.onChange(date);
+                      if (date) {
+                        setValue('start_time', date as Date);
+                      }
+                    }}
+                  />
+                )}
+              />
+            </div>
+            {errors.start_time && (
+              <p className="my-1 self-end text-destructive">{`${errors.start_time.message}`}</p>
+            )}
+          </div>
+
+          <div className="mb-6 flex flex-col justify-between gap-2">
+            <div className="flex items-center justify-between gap-5">
+              <Label htmlFor="end_time">End time</Label>
+              <Controller
+                name="end_time"
+                control={control}
+                render={({ field }) => (
+                  <DateTimePicker
+                    date={field.value}
+                    setDate={(date) => {
+                      field.onChange(date);
+                      if (date) {
+                        setValue('end_time', date as Date);
+                      }
+                    }}
+                  />
+                )}
+              />
+            </div>
+            {errors.end_time && (
+              <p className="my-1 self-end text-destructive">{`${errors.end_time.message}`}</p>
+            )}
           </div>
         </form>
 
@@ -256,7 +281,7 @@ export default function AddEventDialog({ stores }: { stores: StoreValue[] }) {
           <Button variant="ghost" onClick={() => setOpen(false)}>
             Cancel
           </Button>
-          <Button type="submit" form="add-store-form" disabled={isSubmitting}>
+          <Button type="submit" form="add-event-form" disabled={isSubmitting}>
             {isSubmitting ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />

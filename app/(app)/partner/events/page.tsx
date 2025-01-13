@@ -8,7 +8,6 @@ import AddEventDialog from './_components/add-event-dialog';
 import { getEventsOfOwner } from '@/lib/event';
 import { getStoresOfOwner } from '@/lib/store';
 import { auth } from '@/lib/auth';
-import { EventDateProvider } from '@/contexts/EventDateContext';
 
 export const metadata = {
   title: 'VOU | Events'
