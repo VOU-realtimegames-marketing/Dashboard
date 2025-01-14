@@ -24,11 +24,11 @@ const chartConfig = {
   views: {
     label: 'Total Plays'
   },
-  quizGame: {
+  quiz_game: {
     label: 'Quiz Game',
     color: 'hsl(var(--chart-1))' // Màu sắc cho Quiz Game
   },
-  shakeGame: {
+  shake_game: {
     label: 'Shake Game',
     color: 'hsl(var(--chart-2))' // Màu sắc cho Shake Game
   }
@@ -40,12 +40,12 @@ type BarGraphProps = {
 
 export function BarGraph({ chartData = [] }: BarGraphProps) {
   const [activeChart, setActiveChart] =
-    React.useState<keyof typeof chartConfig>('quizGame');
+    React.useState<keyof typeof chartConfig>('quiz_game');
 
   const total = React.useMemo(
     () => ({
-      quizGame: chartData.reduce((acc, curr) => acc + curr.quizGame, 0),
-      shakeGame: chartData.reduce((acc, curr) => acc + curr.shakeGame, 0)
+      quiz_game: chartData.reduce((acc, curr) => acc + curr.quiz_game, 0),
+      shake_game: chartData.reduce((acc, curr) => acc + curr.shake_game, 0)
     }),
     [chartData]
   );
@@ -60,7 +60,7 @@ export function BarGraph({ chartData = [] }: BarGraphProps) {
           </CardDescription>
         </div>
         <div className="flex">
-          {['quizGame', 'shakeGame'].map((key) => {
+          {['quiz_game', 'shake_game'].map((key) => {
             const chart = key as keyof typeof chartConfig;
             return (
               <button

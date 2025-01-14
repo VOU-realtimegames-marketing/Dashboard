@@ -20,20 +20,20 @@ import {
 import { formatNumber, getRangeTime } from '@/lib/utils';
 
 // const chartData = [
-//   { month: 'January', quizGame: 186, shakeGame: 80 },
-//   { month: 'February', quizGame: 305, shakeGame: 200 },
-//   { month: 'March', quizGame: 237, shakeGame: 120 },
-//   { month: 'April', quizGame: 73, shakeGame: 190 },
-//   { month: 'May', quizGame: 209, shakeGame: 130 },
-//   { month: 'June', quizGame: 214, shakeGame: 140 }
+//   { month: 'January', quiz_game: 186, shake_game: 80 },
+//   { month: 'February', quiz_game: 305, shake_game: 200 },
+//   { month: 'March', quiz_game: 237, shake_game: 120 },
+//   { month: 'April', quiz_game: 73, shake_game: 190 },
+//   { month: 'May', quiz_game: 209, shake_game: 130 },
+//   { month: 'June', quiz_game: 214, shake_game: 140 }
 // ];
 
 const chartConfig = {
-  quizGame: {
+  quiz_game: {
     label: 'Quiz game',
     color: 'hsl(var(--chart-1))'
   },
-  shakeGame: {
+  shake_game: {
     label: 'Shake game',
     color: 'hsl(var(--chart-2))'
   }
@@ -45,12 +45,12 @@ type GraphProps = {
 
 export function AreaGraph({ chartData = [] }: GraphProps) {
   const totalVoucherThisMonth =
-    chartData[chartData.length - 1]?.quizGame +
-      chartData[chartData.length - 1]?.shakeGame || 0;
+    chartData[chartData.length - 1]?.quiz_game +
+      chartData[chartData.length - 1]?.shake_game || 0;
 
   const totalVoucherLastMonth =
-    chartData[chartData.length - 2]?.quizGame +
-      chartData[chartData.length - 2]?.shakeGame || 0;
+    chartData[chartData.length - 2]?.quiz_game +
+      chartData[chartData.length - 2]?.shake_game || 0;
 
   const percentTrending =
     (totalVoucherThisMonth / totalVoucherLastMonth - 1) * 100;
@@ -90,19 +90,19 @@ export function AreaGraph({ chartData = [] }: GraphProps) {
               content={<ChartTooltipContent indicator="dot" />}
             />
             <Area
-              dataKey="shakeGame"
+              dataKey="shake_game"
               type="natural"
-              fill="var(--color-shakeGame)"
+              fill="var(--color-shake_game)"
               fillOpacity={0.4}
-              stroke="var(--color-shakeGame)"
+              stroke="var(--color-shake_game)"
               stackId="a"
             />
             <Area
-              dataKey="quizGame"
+              dataKey="quiz_game"
               type="natural"
-              fill="var(--color-quizGame)"
+              fill="var(--color-quiz_game)"
               fillOpacity={0.4}
-              stroke="var(--color-quizGame)"
+              stroke="var(--color-quiz_game)"
               stackId="a"
             />
           </AreaChart>

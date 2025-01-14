@@ -12,15 +12,15 @@ const genFakeData = () => {
   const startDate = new Date();
   startDate.setMonth(today.getMonth() - 2); // Lấy ngày từ 2 tháng trước
 
-  // List số lượng user chơi game, group theo ngày, mỗi ngày sẽ có 2 số liệu là số lượt chơi quizGame và shakeGame
+  // List số lượng user chơi game, group theo ngày, mỗi ngày sẽ có 2 số liệu là số lượt chơi quiz_game và shake_game
   const chartUserPlay = [];
   let currentDate = startDate;
 
   while (currentDate <= today) {
     chartUserPlay.push({
       date: currentDate.toISOString().split('T')[0], // Chuyển đổi ngày sang định dạng "yyyy-mm-dd"
-      quizGame: randomInteger(0, 100), // Số ngẫu nhiên trong khoảng [0, 100]
-      shakeGame: randomInteger(0, 100) // Số ngẫu nhiên trong khoảng [0, 120]
+      quiz_game: randomInteger(0, 100), // Số ngẫu nhiên trong khoảng [0, 100]
+      shake_game: randomInteger(0, 100) // Số ngẫu nhiên trong khoảng [0, 120]
     });
     currentDate.setDate(currentDate.getDate() + 1); // Tăng ngày thêm 1
   }
@@ -64,47 +64,67 @@ const genFakeData = () => {
     }
   ];
 
-  // List thống kê số lượng voucher đã phát trong 6 tháng vừa qua, chia ra voucher của quizGame và voucher của shakeGame
+  // List thống kê số lượng voucher đã phát trong 6 tháng vừa qua, chia ra voucher của quiz_game và voucher của shake_game
   const chartVoucher = [
     {
       month: 'August',
-      quizGame: randomInteger(0, 200),
-      shakeGame: randomInteger(100, 200)
+      quiz_game: randomInteger(0, 200),
+      shake_game: randomInteger(100, 200)
     },
     {
       month: 'September',
-      quizGame: randomInteger(0, 200),
-      shakeGame: randomInteger(100, 200)
+      quiz_game: randomInteger(0, 200),
+      shake_game: randomInteger(100, 200)
     },
     {
       month: 'October',
-      quizGame: randomInteger(0, 200),
-      shakeGame: randomInteger(100, 200)
+      quiz_game: randomInteger(0, 200),
+      shake_game: randomInteger(100, 200)
     },
     {
       month: 'November',
-      quizGame: randomInteger(0, 200),
-      shakeGame: randomInteger(100, 200)
+      quiz_game: randomInteger(0, 200),
+      shake_game: randomInteger(100, 200)
     },
     {
       month: 'December',
-      quizGame: randomInteger(0, 200),
-      shakeGame: randomInteger(100, 200)
+      quiz_game: randomInteger(0, 200),
+      shake_game: randomInteger(100, 200)
     },
     {
       month: 'January',
-      quizGame: randomInteger(0, 200),
-      shakeGame: randomInteger(100, 200)
+      quiz_game: randomInteger(0, 200),
+      shake_game: randomInteger(100, 200)
     }
   ];
 
   // list user chơi game, group theo store, filter time trong 6 tháng gần nhất
   const chartUserStore = [
-    { id: 1, name: 'Cửa hàng 1', total_user_play: randomInteger(100, 1000) },
-    { id: 2, name: 'Cửa hàng 2', total_user_play: randomInteger(100, 1000) },
-    { id: 3, name: 'Cửa hàng 3', total_user_play: randomInteger(100, 1000) },
-    { id: 4, name: 'Cửa hàng 4', total_user_play: randomInteger(100, 1000) },
-    { id: 5, name: 'Cửa hàng 5', total_user_play: randomInteger(100, 1000) }
+    {
+      store_id: 1,
+      name: 'Cửa hàng 1',
+      total_user_play: randomInteger(100, 1000)
+    },
+    {
+      store_id: 2,
+      name: 'Cửa hàng 2',
+      total_user_play: randomInteger(100, 1000)
+    },
+    {
+      store_id: 3,
+      name: 'Cửa hàng 3',
+      total_user_play: randomInteger(100, 1000)
+    },
+    {
+      store_id: 4,
+      name: 'Cửa hàng 4',
+      total_user_play: randomInteger(100, 1000)
+    },
+    {
+      store_id: 5,
+      name: 'Cửa hàng 5',
+      total_user_play: randomInteger(100, 1000)
+    }
   ];
   return {
     total_store: randomInteger(1, 50),
@@ -147,6 +167,7 @@ export async function getOverview(): Promise<any> {
 
   console.log('___Result getOverview:', rs);
 
+  return fakeData;
   // console.log(stores);
   return rs;
 }
