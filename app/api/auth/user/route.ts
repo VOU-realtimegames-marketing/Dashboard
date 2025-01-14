@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
       headers: {
         cookie: `accessToken=${accessToken}; refreshToken=${refreshToken}`
       },
-      next: { revalidate: 1500 * 60 }
+      next: { revalidate: 86400 }
     }
   );
 

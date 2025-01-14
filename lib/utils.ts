@@ -50,3 +50,10 @@ export function getRangeTime() {
 
   return `${last6Month} ${yearOfLast6Month} - ${currentMonth} ${yearOfCurrentMonth}`;
 }
+
+export const getSign = (value: number) => (value >= 0 ? '+' : '-');
+
+export const parseNumberStr = (value: number) => {
+  const sign = getSign(value);
+  return `${sign}${formatNumber(Math.abs(value))}`;
+};

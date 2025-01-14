@@ -15,6 +15,8 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { getOverview } from '@/lib/cms';
 import { formatNumber } from '@/lib/utils';
+import { DateRange } from 'react-day-picker';
+import DateRangePicker from '@/components/DateRangePicker';
 
 export default async function OverViewPage() {
   const data = await getOverview();
@@ -38,8 +40,8 @@ export default async function OverViewPage() {
           {/* <h2 className="text-2xl font-bold tracking-tight">
             Hi, Welcome back 👋
           </h2> */}
-          <div className="hidden items-center space-x-2 md:flex">
-            <CalendarDateRangePicker />
+          <div className="md: hidden items-center justify-between justify-between space-x-2 md:flex">
+            <DateRangePicker />
             <Button>Download</Button>
           </div>
         </div>
