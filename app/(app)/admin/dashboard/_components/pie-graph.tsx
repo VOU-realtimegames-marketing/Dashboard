@@ -68,7 +68,7 @@ export function PieGraph({ chartData = [] }: GraphProps) {
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>User Play by Store</CardTitle>
+        <CardTitle>User Play by Partner</CardTitle>
         <CardDescription>July 2024 - January 2025</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
