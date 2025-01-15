@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { cookies } from 'next/headers';
 
 const randomInteger = (min = 0, max = 10) => {
@@ -162,40 +163,35 @@ const genFakeAdminData = () => {
       username: 'nguyenvananh123',
       full_name: 'Nguyễn Văn Anh',
       email: 'nguyenvananh123@gmail.com',
-      photo: 'https://xsgames.co/randomusers/avatar.php?g=male',
-      vouchers: randomInteger(1, 8)
+      photo: 'https://xsgames.co/randomusers/avatar.php?g=male'
     },
     {
       username: 'tranthimy987',
       full_name: 'Trần Thị My',
       email: 'tranthimy987@gmail.com',
-      photo: 'https://avatar.iran.liara.run/public/girl',
-      vouchers: randomInteger(1, 8)
+      photo: 'https://avatar.iran.liara.run/public/girl'
     },
     {
       username: 'lehoangbao234',
       full_name: 'Lê Hoàng Bảo',
       email: 'lehoangbao234@gmail.com',
-      photo: 'https://avatar.iran.liara.run/public/boy',
-      vouchers: randomInteger(1, 8)
+      photo: 'https://avatar.iran.liara.run/public/boy'
     },
     {
       username: 'phamthiquynh456',
       full_name: 'Phạm Thị Quỳnh',
       email: 'phamthiquynh456@gmail.com',
-      photo: 'https://xsgames.co/randomusers/avatar.php?g=female',
-      vouchers: randomInteger(1, 8)
+      photo: 'https://xsgames.co/randomusers/avatar.php?g=female'
     },
     {
       username: 'dangminhtuan789',
       full_name: 'Đặng Minh Tuấn',
       email: 'dangminhtuan789@gmail.com',
-      photo: 'https://avatar.iran.liara.run/public',
-      vouchers: randomInteger(1, 8)
+      photo: 'https://avatar.iran.liara.run/public'
     }
   ];
 
-  // List thống kê số lượng số lượt user chơi quiz_game và shake_game
+  // List thống kê số lượng số lượt user chơi quiz_game và shake_game, group by month, ví dụ tháng 1: có 3 user chơi quiz game, 5 user chơi shake game, tháng 2: có 8 user chơi quiz game, 10 user chơi shake game, ...
   const chartUserPlayGame = [
     {
       month: 'August',
@@ -229,20 +225,17 @@ const genFakeAdminData = () => {
     }
   ];
 
-  // list user chơi game phân bổ theo từng partner
-  const chartUserStore = [
+  // list user chơi game, group by partner username
+  const chartUserPlayGroupbyPartner = [
     {
-      id: 1,
       username: 'partner_01',
       total_user_play: randomInteger(100, 1000)
     },
     {
-      id: 2,
       username: 'partner_02',
       total_user_play: randomInteger(100, 1000)
     },
     {
-      id: 3,
       username: 'partner_03',
       total_user_play: randomInteger(100, 1000)
     }
@@ -257,11 +250,47 @@ const genFakeAdminData = () => {
     total_branch_last_month: randomInteger(0, 50),
     total_earning: randomInteger(0, 1000000),
     total_earning_last_month: randomInteger(0, 100000),
-    bar_chart: chartEventCreated,
-    area_chart: chartUserPlayGame,
-    pie_chart: chartUserStore,
-    list_recent
+    chart_event_created: chartEventCreated,
+    chart_user_play_game: chartUserPlayGame,
+    chart_user_play_group_by_partner: chartUserPlayGroupbyPartner,
+    list_recent_partners: list_recent
   };
+};
+
+const parseAdminOverviewData = (rawData: any) => {
+  // rawData = {
+  //   total_partner: 1,
+  //   total_partner_last_month: 1,
+  //   total_user: 13,
+  //   total_user_last_month: 13,
+  //   total_branch: 4,
+  //   total_branch_last_month: 1,
+  //   chart_event_created: [
+  //     { date: '1732838400', quiz_game: 2, shake_game: 2 },
+  //     { date: '1734998400', quiz_game: 2, shake_game: 2 },
+  //     { date: '1735430400', quiz_game: 2, shake_game: 2 },
+  //     { date: '1738108800', quiz_game: 2, shake_game: 2 }
+  //   ],
+  //   chart_user_play_game: [
+  //     { month: 'December ', quiz_game: 201, shake_game: 229 },
+  //     { month: 'January  ', quiz_game: 182, shake_game: 172 }
+  //   ],
+  //   chart_user_play_group_by_partner: [ { username: 'partner_user', total_user_play: 13 } ],
+  //   list_recent_partners: [
+  //     {
+  //       username: 'partner_user',
+  //       full_name: 'Partner User',
+  //       email: 'partner_user@example.com',
+  //       photo: 'default-user.jpg'
+  //     }
+  //   ]
+  // }
+
+  rawData?.chart_event_created?.forEach((item: { date: string }) => {
+    item.date = format(+item.date * 1000, 'yyyy-MM-dd');
+  });
+
+  return rawData;
 };
 
 export async function getOverview(isPartner = true): Promise<any> {
@@ -274,7 +303,9 @@ export async function getOverview(isPartner = true): Promise<any> {
   console.log('___accessToken:', accessToken);
 
   const response = await fetch(
-    `${process.env.API_GATEWAY_URL}/api/v1/cms/overview`,
+    `${process.env.API_GATEWAY_URL}/api/v1/cms/${
+      isPartner ? 'overview' : 'admin-overview'
+    }`,
     {
       method: 'GET',
       headers: {
@@ -290,9 +321,8 @@ export async function getOverview(isPartner = true): Promise<any> {
 
   const rs = await response.json();
 
-  console.log('___Result getOverview:', rs);
-
-  return fakeData;
-  // console.log(stores);
-  return rs;
+  if (isPartner) {
+    return fakeData;
+  }
+  return parseAdminOverviewData(rs);
 }

@@ -28,10 +28,10 @@ export default async function Dashboard() {
     total_branch_last_month = 0,
     total_earning = 0,
     total_earning_last_month = 0,
-    bar_chart = [],
-    area_chart = [],
-    pie_chart = [],
-    list_recent = []
+    chart_event_created: bar_chart = [],
+    chart_user_play_game: area_chart = [],
+    chart_user_play_group_by_partner: pie_chart = [],
+    list_recent_partners = []
   } = data;
 
   const increasePartner = total_partner - total_partner_last_month;
@@ -39,8 +39,6 @@ export default async function Dashboard() {
 
   const increaseBranch = total_branch - total_branch_last_month;
   const increaseEarning = total_earning - total_earning_last_month;
-
-  console.log('___data:', total_partner, total_partner_last_month);
 
   return (
     <PageContainer scrollable>
@@ -181,11 +179,12 @@ export default async function Dashboard() {
                 <CardHeader>
                   <CardTitle>Recent Partners</CardTitle>
                   <CardDescription>
-                    You have {list_recent.length} new partner this month.
+                    You have {list_recent_partners.length} new partner this
+                    month.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <RecentSales list_recent={list_recent} />
+                  <RecentSales list_recent={list_recent_partners} />
                 </CardContent>
               </Card>
               <div className="col-span-4">

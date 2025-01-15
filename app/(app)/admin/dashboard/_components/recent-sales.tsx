@@ -13,14 +13,8 @@ export function RecentSales({ list_recent = [] }) {
   return (
     <div className="space-y-8">
       {list_recent.map(
-        (item: {
-          username: any;
-          full_name: any;
-          email: any;
-          photo: any;
-          vouchers: any;
-        }) => {
-          const { username, full_name, email, photo, vouchers } = item;
+        (item: { username: any; full_name: any; email: any; photo: any }) => {
+          const { username, full_name, email, photo } = item;
           return (
             <div className="flex items-center">
               <Avatar className="h-9 w-9">
@@ -30,9 +24,6 @@ export function RecentSales({ list_recent = [] }) {
               <div className="ml-4 space-y-1">
                 <p className="text-sm font-medium leading-none">{full_name}</p>
                 <p className="text-sm text-muted-foreground">{email}</p>
-              </div>
-              <div className="ml-auto font-medium">
-                + {formatNumber(vouchers, 0)}
               </div>
             </div>
           );
