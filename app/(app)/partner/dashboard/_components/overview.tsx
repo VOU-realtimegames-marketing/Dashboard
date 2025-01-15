@@ -21,15 +21,15 @@ import DateRangePicker from '@/components/DateRangePicker';
 export default async function OverViewPage() {
   const data = await getOverview();
   const {
-    total_store,
-    total_branch,
-    total_event,
-    total_user_play,
-    last_month_total_user_play,
-    chart_user_play,
-    list_recent_user,
-    chart_voucher,
-    chart_user_store
+    total_store = 0,
+    total_branch = 0,
+    total_event = 0,
+    total_user_play = 0,
+    last_month_total_user_play = 0,
+    chart_user_play = [],
+    list_recent_user = [],
+    chart_voucher = [],
+    chart_user_store = []
   } = data;
   const lastMonthUser = total_user_play - last_month_total_user_play;
 

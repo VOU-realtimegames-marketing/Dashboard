@@ -293,6 +293,103 @@ const parseAdminOverviewData = (rawData: any) => {
   return rawData;
 };
 
+const parsePartnerOverviewData = (rawData: any) => {
+  // rawData = {
+  //   total_store: 2,
+  //   total_branch: 4,
+  //   total_event: 20,
+  //   total_user_play: 784,
+  //   last_month_total_user_play: 314,
+  //   chart_user_play: [
+  //     { date: '1734393600', quiz_game: 6, shake_game: 7 },
+  //     { date: '1734652800', quiz_game: 11, shake_game: 10 },
+  //     { date: '1735084800', quiz_game: 7, shake_game: 8 },
+  //     { date: '1735344000', quiz_game: 8, shake_game: 6 },
+  //     { date: '1735862400', quiz_game: 8, shake_game: 6 },
+  //     { date: '1736121600', quiz_game: 7, shake_game: 9 },
+  //     { date: '1734739200', quiz_game: 9, shake_game: 12 },
+  //     { date: '1734825600', quiz_game: 8, shake_game: 8 },
+  //     { date: '1736208000', quiz_game: 12, shake_game: 10 },
+  //     { date: '1736553600', quiz_game: 5, shake_game: 5 },
+  //     { date: '1734998400', quiz_game: 8, shake_game: 8 },
+  //     { date: '1735603200', quiz_game: 10, shake_game: 7 },
+  //     { date: '1735948800', quiz_game: 8, shake_game: 9 },
+  //     { date: '1736726400', quiz_game: 8, shake_game: 7 },
+  //     { date: '1735257600', quiz_game: 8, shake_game: 8 },
+  //     { date: '1735430400', quiz_game: 9, shake_game: 7 },
+  //     { date: '1736035200', quiz_game: 8, shake_game: 7 },
+  //     { date: '1736294400', quiz_game: 9, shake_game: 11 },
+  //     { date: '1734566400', quiz_game: 7, shake_game: 9 },
+  //     { date: '1734912000', quiz_game: 8, shake_game: 8 },
+  //     { date: '1735516800', quiz_game: 8, shake_game: 8 },
+  //     { date: '1736640000', quiz_game: 7, shake_game: 7 },
+  //     { date: '1736812800', quiz_game: 10, shake_game: 10 },
+  //     { date: '1735171200', quiz_game: 9, shake_game: 7 },
+  //     { date: '1735689600', quiz_game: 10, shake_game: 7 },
+  //     { date: '1735776000', quiz_game: 9, shake_game: 5 },
+  //     { date: '1736380800', quiz_game: 7, shake_game: 8 },
+  //     { date: '1736467200', quiz_game: 9, shake_game: 9 },
+  //     { date: '1734307200', quiz_game: 10, shake_game: 7 },
+  //     { date: '1734480000', quiz_game: 9, shake_game: 6 }
+  //   ],
+  //   list_recent_user: [
+  //     {
+  //       username: 'hoangmaiJ',
+  //       full_name: 'Hoàng Mai J',
+  //       email: 'hoangmaiJ@gmail.com',
+  //       photo: 'default-user.jpg',
+  //       vouchers: 59
+  //     },
+  //     {
+  //       username: 'doquyenH',
+  //       full_name: 'Đỗ Quyên H',
+  //       email: 'doquyenH@gmail.com',
+  //       photo: 'default-user.jpg',
+  //       vouchers: 79
+  //     },
+  //     {
+  //       username: 'huynhngocF',
+  //       full_name: 'Huỳnh Ngọc F',
+  //       email: 'huynhngocF@gmail.com',
+  //       photo: 'default-user.jpg',
+  //       vouchers: 14
+  //     },
+  //     {
+  //       username: 'dangthuyE',
+  //       full_name: 'Đặng Thúy E',
+  //       email: 'dangthuyE@gmail.com',
+  //       photo: 'default-user.jpg',
+  //       vouchers: 68
+  //     },
+  //     {
+  //       username: 'fakeUserC',
+  //       full_name: 'Fake User C',
+  //       email: 'fakeC@gmail.com',
+  //       photo: 'default-user.jpg',
+  //       vouchers: 76
+  //     }
+  //   ],
+  //   chart_voucher: [
+  //     { month: '2024-12', quiz_game: 201, shake_game: 229 },
+  //     { month: '2025-01', quiz_game: 182, shake_game: 172 }
+  //   ],
+  //   chart_user_store: [
+  //     {
+  //       store_id: '1',
+  //       store_name: 'Highland Coffee',
+  //       total_user_play: 13
+  //     },
+  //     { store_id: '2', store_name: 'Starbucks', total_user_play: 13 }
+  //   ]
+  // }
+
+  // rawData?.chart_user_play?.forEach((item: { date: string }) => {
+  //   item.date = format(+item.date * 1000, 'yyyy-MM-dd');
+  // });
+
+  return rawData;
+};
+
 export async function getOverview(isPartner = true): Promise<any> {
   const fakeData = isPartner ? genFakePartnerData() : genFakeAdminData();
   // return fakeData;
@@ -304,7 +401,7 @@ export async function getOverview(isPartner = true): Promise<any> {
 
   const response = await fetch(
     `${process.env.API_GATEWAY_URL}/api/v1/cms/${
-      isPartner ? 'overview' : 'admin-overview'
+      isPartner ? 'partner-overview' : 'admin-overview'
     }`,
     {
       method: 'GET',
@@ -321,8 +418,10 @@ export async function getOverview(isPartner = true): Promise<any> {
 
   const rs = await response.json();
 
+  console.log('___rs:', rs);
+
   if (isPartner) {
-    return fakeData;
+    return parsePartnerOverviewData(rs);
   }
   return parseAdminOverviewData(rs);
 }
