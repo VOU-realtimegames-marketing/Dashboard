@@ -1,6 +1,6 @@
 'use client';
 
-import { TrendingUp } from 'lucide-react';
+import { TrendingDown, TrendingUp } from 'lucide-react';
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
 
 import {
@@ -17,33 +17,51 @@ import {
   ChartTooltip,
   ChartTooltipContent
 } from '@/components/ui/chart';
-const chartData = [
-  { month: 'January', desktop: 186, mobile: 80 },
-  { month: 'February', desktop: 305, mobile: 200 },
-  { month: 'March', desktop: 237, mobile: 120 },
-  { month: 'April', desktop: 73, mobile: 190 },
-  { month: 'May', desktop: 209, mobile: 130 },
-  { month: 'June', desktop: 214, mobile: 140 }
-];
+import { formatNumber, getRangeTime } from '@/lib/utils';
+
+// const chartData = [
+//   { month: 'January', quiz_game: 186, shake_game: 80 },
+//   { month: 'February', quiz_game: 305, shake_game: 200 },
+//   { month: 'March', quiz_game: 237, shake_game: 120 },
+//   { month: 'April', quiz_game: 73, shake_game: 190 },
+//   { month: 'May', quiz_game: 209, shake_game: 130 },
+//   { month: 'June', quiz_game: 214, shake_game: 140 }
+// ];
 
 const chartConfig = {
-  desktop: {
-    label: 'Desktop',
+  quiz_game: {
+    label: 'Quiz game',
     color: 'hsl(var(--chart-1))'
   },
-  mobile: {
-    label: 'Mobile',
+  shake_game: {
+    label: 'Shake game',
     color: 'hsl(var(--chart-2))'
   }
 } satisfies ChartConfig;
 
-export function AreaGraph() {
+type GraphProps = {
+  chartData: any[]; // Kiểu mảng bất kỳ
+};
+
+export function AreaGraph({ chartData = [] }: GraphProps) {
+  const totalVoucherThisMonth =
+    chartData[chartData.length - 1]?.quiz_game +
+      chartData[chartData.length - 1]?.shake_game || 0;
+
+  const totalVoucherLastMonth =
+    chartData[chartData.length - 2]?.quiz_game +
+      chartData[chartData.length - 2]?.shake_game || 0;
+
+  const percentTrending =
+    (totalVoucherThisMonth / totalVoucherLastMonth - 1) * 100;
+
+  const timeRange = getRangeTime();
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Area Chart - Stacked</CardTitle>
+        <CardTitle>User plays statistic</CardTitle>
         <CardDescription>
-          Showing total visitors for the last 6 months
+          Total user plays of Shake Game and Quiz Game, for the last 6 months
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -72,19 +90,19 @@ export function AreaGraph() {
               content={<ChartTooltipContent indicator="dot" />}
             />
             <Area
-              dataKey="mobile"
+              dataKey="shake_game"
               type="natural"
-              fill="var(--color-mobile)"
+              fill="var(--color-shake_game)"
               fillOpacity={0.4}
-              stroke="var(--color-mobile)"
+              stroke="var(--color-shake_game)"
               stackId="a"
             />
             <Area
-              dataKey="desktop"
+              dataKey="quiz_game"
               type="natural"
-              fill="var(--color-desktop)"
+              fill="var(--color-quiz_game)"
               fillOpacity={0.4}
-              stroke="var(--color-desktop)"
+              stroke="var(--color-quiz_game)"
               stackId="a"
             />
           </AreaChart>
@@ -94,10 +112,20 @@ export function AreaGraph() {
         <div className="flex w-full items-start gap-2 text-sm">
           <div className="grid gap-2">
             <div className="flex items-center gap-2 font-medium leading-none">
-              Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+              {percentTrending > 0 ? (
+                <>
+                  Trending up by {formatNumber(percentTrending, 2)}% this month{' '}
+                  <TrendingUp className="h-4 w-4" />
+                </>
+              ) : (
+                <>
+                  Trending down by {formatNumber(percentTrending, 2)}% this
+                  month <TrendingDown className="h-4 w-4" />
+                </>
+              )}
             </div>
             <div className="flex items-center gap-2 leading-none text-muted-foreground">
-              January - June 2024
+              {timeRange}
             </div>
           </div>
         </div>

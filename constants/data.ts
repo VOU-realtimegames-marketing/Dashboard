@@ -231,22 +231,22 @@ export const adminNavItems: NavItem[] = [
     isActive: false,
     items: [] // No child items
   },
-  {
-    title: 'Product',
-    url: '/admin/product',
-    icon: 'product',
-    shortcut: ['p', 'p'],
-    isActive: false,
-    items: [] // No child items
-  },
-  {
-    title: 'Example',
-    url: '/admin/example',
-    icon: 'example_icon',
-    shortcut: ['p', 'p'],
-    isActive: false,
-    items: [] // No child items
-  },
+  // {
+  //   title: 'Product',
+  //   url: '/admin/product',
+  //   icon: 'product',
+  //   shortcut: ['p', 'p'],
+  //   isActive: false,
+  //   items: [] // No child items
+  // },
+  // {
+  //   title: 'Example',
+  //   url: '/admin/example',
+  //   icon: 'example_icon',
+  //   shortcut: ['p', 'p'],
+  //   isActive: false,
+  //   items: [] // No child items
+  // },
   {
     title: 'Account',
     url: '#', // Placeholder as there is no direct link for the parent
@@ -279,14 +279,14 @@ export const partnerNavItems: NavItem[] = [
     shortcut: ['d', 'd'],
     items: [] // Empty array as there are no child items for Dashboard
   },
-  {
-    title: 'Employee',
-    url: '/partner/employee',
-    icon: 'user',
-    shortcut: ['p', 'e'],
-    isActive: false,
-    items: [] // No child items
-  },
+  // {
+  //   title: 'Employee',
+  //   url: '/partner/employee',
+  //   icon: 'user',
+  //   shortcut: ['p', 'e'],
+  //   isActive: false,
+  //   items: [] // No child items
+  // },
   {
     title: 'Stores',
     url: '/partner/stores',
@@ -303,14 +303,14 @@ export const partnerNavItems: NavItem[] = [
     isActive: false,
     items: [] // No child items
   },
-  {
-    title: 'Product',
-    url: '/partner/product',
-    icon: 'product',
-    shortcut: ['p', 'p'],
-    isActive: false,
-    items: [] // No child items
-  },
+  // {
+  //   title: 'Product',
+  //   url: '/partner/product',
+  //   icon: 'product',
+  //   shortcut: ['p', 'p'],
+  //   isActive: false,
+  //   items: [] // No child items
+  // },
   {
     title: 'Account',
     url: '#', // Placeholder as there is no direct link for the parent

@@ -15,19 +15,21 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { getOverview } from '@/lib/cms';
 import { formatNumber } from '@/lib/utils';
+import { DateRange } from 'react-day-picker';
+import DateRangePicker from '@/components/DateRangePicker';
 
 export default async function OverViewPage() {
   const data = await getOverview();
   const {
-    total_store,
-    total_branch,
-    total_event,
-    total_user_play,
-    last_month_total_user_play,
-    chart_user_play,
-    list_recent_user,
-    chart_voucher,
-    chart_user_store
+    total_store = 0,
+    total_branch = 0,
+    total_event = 0,
+    total_user_play = 0,
+    last_month_total_user_play = 0,
+    chart_user_play = [],
+    list_recent_user = [],
+    chart_voucher = [],
+    chart_user_store = []
   } = data;
   const lastMonthUser = total_user_play - last_month_total_user_play;
 
@@ -38,8 +40,8 @@ export default async function OverViewPage() {
           {/* <h2 className="text-2xl font-bold tracking-tight">
             Hi, Welcome back 👋
           </h2> */}
-          <div className="hidden items-center space-x-2 md:flex">
-            <CalendarDateRangePicker />
+          <div className="md: hidden items-center justify-between justify-between space-x-2 md:flex">
+            <DateRangePicker />
             <Button>Download</Button>
           </div>
         </div>

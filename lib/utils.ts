@@ -31,9 +31,27 @@ export const formatNumber = (value = 0, precision = 3) =>
     minimumFractionDigits: 0,
     maximumFractionDigits: precision
   }).format(value);
-
 export const randomColor = () => {
-  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+  const isColorReadable = (r, g, b) => {
+    const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    return luminance > 40 && luminance < 220; // Tránh quá tối hoặc quá sáng
+  };
+
+  let color;
+
+  do {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+
+    if (isColorReadable(r, g, b)) {
+      color = `#${((1 << 24) + (r << 16) + (g << 8) + b)
+        .toString(16)
+        .slice(1)}`;
+    }
+  } while (!color);
+
+  return color;
 };
 
 export function getRangeTime() {
@@ -50,3 +68,10 @@ export function getRangeTime() {
 
   return `${last6Month} ${yearOfLast6Month} - ${currentMonth} ${yearOfCurrentMonth}`;
 }
+
+export const getSign = (value: number) => (value >= 0 ? '+' : '-');
+
+export const parseNumberStr = (value: number) => {
+  const sign = getSign(value);
+  return `${sign}${formatNumber(Math.abs(value))}`;
+};
